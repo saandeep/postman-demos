@@ -760,9 +760,36 @@
 			}
 		]
 	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "281d8068-28f7-4a2d-94e0-ca54b8242876",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ab1187bd-9f88-4fa9-9d7e-0b99e0ee0206",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"pm.test(\"Response time is less than 200ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(200);",
+					"});"
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "8a424a12-8115-410a-aa93-4f8b8ab49d60",
+			"id": "04b2dd75-6a53-4142-8eaa-ab8b8f114e90",
 			"key": "baseUrl",
 			"value": "{{baseUrl}}",
 			"type": "any"
