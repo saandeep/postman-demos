@@ -586,6 +586,23 @@
 				},
 				{
 					"name": "/persons",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "912c6492-e081-4218-b626-a9b5235c0c65",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 2s\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "cabc33bc-bc30-4c7b-b935-49820e6fe165",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -764,7 +781,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "136182e6-5d8a-45b2-94bb-d94333b6e1b1",
+				"id": "54fcd639-0a4b-478e-9c96-08be2acbf1e5",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -774,22 +791,17 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "66a8e03a-1cd6-4745-9a60-d6d99367eff5",
+				"id": "2ed763ba-dbee-4d8a-be2d-b4279c6fa753",
 				"type": "text/javascript",
 				"exec": [
-					"pm.test(\"Status code is 200\", function () {",
-					"    pm.response.to.have.status(200);",
-					"});",
-					"pm.test(\"Response time is less than 2s\", function () {",
-					"    pm.expect(pm.response.responseTime).to.be.below(2000);",
-					"});"
+					""
 				]
 			}
 		}
 	],
 	"variable": [
 		{
-			"id": "13e8b93c-ddf8-4b2c-95c4-450c0726066c",
+			"id": "bc13f0aa-8ad3-4f3c-97e7-a15f995c3d27",
 			"key": "baseUrl",
 			"value": "https://40f8f434-6f9f-4366-a75e-37360ac74174.mock.pstmn.io",
 			"type": "any"
