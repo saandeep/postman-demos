@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "fcf105ae-c19e-4a21-8f5f-751bff9d31ea",
-		"name": "Unit Tests",
+		"_postman_id": "f4f3722d-4502-4d52-9900-47d23975d2b9",
+		"name": "API Documentation",
 		"description": "This an API for managing persons that exist in the Union Fashion persons, allowing any desktop, web, mobile, or device application to integrate with persons made via our platform.\n\nContact Support:\n Name: Example Support\n Email: admin@admin.com",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "27254826-fcf105ae-c19e-4a21-8f5f-751bff9d31ea"
+		"_uid": "27254826-f4f3722d-4502-4d52-9900-47d23975d2b9"
 	},
 	"item": [
 		{
@@ -15,7 +15,7 @@
 					"item": [
 						{
 							"name": "/persons/:personId",
-							"id": "1e245c58-1517-4b21-baef-662e13ffb466",
+							"id": "9e33a04f-bad5-4c08-9b35-745ec431e538",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -59,7 +59,7 @@
 									"variable": [
 										{
 											"key": "personId",
-											"value": ""
+											"value": "1234-4321-1234-4321"
 										}
 									]
 								},
@@ -67,7 +67,7 @@
 							},
 							"response": [
 								{
-									"id": "6d893d9a-1cef-4bbf-bbcd-1aac39e6ad34",
+									"id": "3badc2d6-63c3-4289-9da9-14c18a778e4d",
 									"name": "Single person.",
 									"originalRequest": {
 										"method": "GET",
@@ -108,10 +108,10 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n  \"identifier\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"bio\": \"<string>\",\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"title\": \"<string>\",\n  \"dateOfBirth\": \"<string>\"\n}"
+									"body": "{\n  \"status\": \"success\"\n}"
 								},
 								{
-									"id": "fa0f8b8e-5cd8-4a39-aa84-48212610c663",
+									"id": "a16f95d9-fd26-44a5-b580-a02dc07387a4",
 									"name": "Internal server error",
 									"originalRequest": {
 										"method": "GET",
@@ -148,7 +148,7 @@
 						},
 						{
 							"name": "/persons/:personId",
-							"id": "7d6f18a9-1cdc-4c44-b959-8c3d85b6f094",
+							"id": "ec852d5e-a5b9-4568-9fad-c12ac7eb2648",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -182,7 +182,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"identifier\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"bio\": \"<string>\",\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"title\": \"<string>\",\n  \"dateOfBirth\": \"<string>\"\n}",
+									"raw": "{\n  \"unitSalePrice\": 29.99\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -202,7 +202,7 @@
 									"variable": [
 										{
 											"key": "personId",
-											"value": "identifier,<string>,firstName,<string>,lastName,<string>,bio,<string>,image,<string>,url,<string>,title,<string>,dateOfBirth,<string>"
+											"value": "1234-4321-1234-4321"
 										}
 									]
 								},
@@ -210,7 +210,7 @@
 							},
 							"response": [
 								{
-									"id": "d2f95393-8f48-476e-86d5-91ceff31922f",
+									"id": "082dc686-80f9-4e4e-9c2e-2193e11dea1c",
 									"name": "Successfully updated.",
 									"originalRequest": {
 										"method": "PUT",
@@ -227,7 +227,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"identifier\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"bio\": \"<string>\",\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"title\": \"<string>\",\n  \"dateOfBirth\": \"<string>\"\n}",
+											"raw": "{\n  \"unitSalePrice\": 29.99\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -258,7 +258,7 @@
 									"cookie": []
 								},
 								{
-									"id": "a744fcb5-b058-4984-acb3-95cb5c5b4b3a",
+									"id": "bc1a36b0-3755-4353-8b31-6953b25e289b",
 									"name": "Internal server error",
 									"originalRequest": {
 										"method": "PUT",
@@ -275,7 +275,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"identifier\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"bio\": \"<string>\",\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"title\": \"<string>\",\n  \"dateOfBirth\": \"<string>\"\n}",
+											"raw": "{\n  \"unitSalePrice\": 29.99\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -309,7 +309,7 @@
 						},
 						{
 							"name": "/persons/:personId",
-							"id": "50af8e1c-9b63-4094-910b-7a9409b48501",
+							"id": "edd76ce7-4cc7-4e5e-a13c-37b0ef1bf1a6",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -348,7 +348,7 @@
 									"variable": [
 										{
 											"key": "personId",
-											"value": "identifier,<string>,firstName,<string>,lastName,<string>,bio,<string>,image,<string>,url,<string>,title,<string>,dateOfBirth,<string>"
+											"value": "1234-4321-1234-4321"
 										}
 									]
 								},
@@ -356,7 +356,7 @@
 							},
 							"response": [
 								{
-									"id": "6ab9e55a-461a-477c-9959-15b4b90d7050",
+									"id": "3d553893-56fe-4d4c-b2ee-a21564b990b5",
 									"name": "Person deleted.",
 									"originalRequest": {
 										"method": "DELETE",
@@ -390,7 +390,7 @@
 									"cookie": []
 								},
 								{
-									"id": "16d299a5-5bd1-4fb6-a14b-e57632624ca5",
+									"id": "c6443adf-4ced-4767-9e59-d06942ab27c2",
 									"name": "Internal server error",
 									"originalRequest": {
 										"method": "DELETE",
@@ -426,11 +426,11 @@
 							]
 						}
 					],
-					"id": "3a36df6a-fa28-467e-98a4-4b685789d97d"
+					"id": "bef5c035-485b-4db9-a1bb-54007fe35e8b"
 				},
 				{
 					"name": "/persons",
-					"id": "42d567c1-c51f-45a3-9743-1a6ceece0541",
+					"id": "c8d97286-ea61-47e4-97b5-47c27fb476b5",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -468,7 +468,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"identifier\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"bio\": \"<string>\",\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"title\": \"<string>\",\n  \"dateOfBirth\": \"<string>\"\n}",
+							"raw": "{\n  \"category\": \"Jeans\",\n  \"brand\": \"Union\",\n  \"color\": \"black\",\n  \"gender\": \"m\",\n  \"unitPrice\": 49.99,\n  \"unitSalePrice\": 29.99\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -489,7 +489,7 @@
 					},
 					"response": [
 						{
-							"id": "9a6e4ee7-bc14-4ca2-9a68-f613146b5daa",
+							"id": "725c63e8-237d-4c4d-bfb1-c1daa90cba5e",
 							"name": "Successful creation of person.",
 							"originalRequest": {
 								"method": "POST",
@@ -510,7 +510,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"identifier\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"bio\": \"<string>\",\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"title\": \"<string>\",\n  \"dateOfBirth\": \"<string>\"\n}",
+									"raw": "{\n  \"category\": \"Jeans\",\n  \"brand\": \"Union\",\n  \"color\": \"black\",\n  \"gender\": \"m\",\n  \"unitPrice\": 49.99,\n  \"unitSalePrice\": 29.99\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -538,10 +538,10 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n  \"identifier\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"bio\": \"<string>\",\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"title\": \"<string>\",\n  \"dateOfBirth\": \"<string>\"\n}"
+							"body": "{\n  \"status\": \"success\"\n}"
 						},
 						{
-							"id": "26aa1ff1-ec70-47bb-8a89-944ac2f38ef3",
+							"id": "36060aa6-5075-4b1a-8532-55cbc1aa9d89",
 							"name": "Internal server error",
 							"originalRequest": {
 								"method": "POST",
@@ -558,7 +558,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"identifier\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"bio\": \"<string>\",\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"title\": \"<string>\",\n  \"dateOfBirth\": \"<string>\"\n}",
+									"raw": "{\n  \"category\": \"Jeans\",\n  \"brand\": \"Union\",\n  \"color\": \"black\",\n  \"gender\": \"m\",\n  \"unitPrice\": 49.99,\n  \"unitSalePrice\": 29.99\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -586,7 +586,7 @@
 				},
 				{
 					"name": "/persons",
-					"id": "cabc33bc-bc30-4c7b-b935-49820e6fe165",
+					"id": "f872daa1-580d-481c-aba1-2e0ec4665667",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -619,19 +619,26 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/persons",
+							"raw": "{{baseUrl}}/persons?query=all-users",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"persons"
+							],
+							"query": [
+								{
+									"description": "(Required) A query to search for persons by.",
+									"key": "query",
+									"value": "all-users"
+								}
 							]
 						},
 						"description": "Pulls a list of all person"
 					},
 					"response": [
 						{
-							"id": "bcc66f94-b28b-4f84-a6d4-9d11a463f9fa",
+							"id": "d0d66edc-8fbf-4654-8ff9-e02bf45470b4",
 							"name": "Get list of all persons",
 							"originalRequest": {
 								"method": "GET",
@@ -647,12 +654,19 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/persons",
+									"raw": "{{baseUrl}}/persons?query=all-users",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"persons"
+									],
+									"query": [
+										{
+											"description": "(Required) A query to search for persons by.",
+											"key": "query",
+											"value": "all-users"
+										}
 									]
 								}
 							},
@@ -666,10 +680,10 @@
 								}
 							],
 							"cookie": [],
-							"body": "{}"
+							"body": "{\n  \"status\": \"success\"\n}"
 						},
 						{
-							"id": "59f40e12-7eeb-4c42-99f4-06d8eb6d4b71",
+							"id": "feefc14e-cb8b-4481-afb8-57a2db4c5b3b",
 							"name": "Unauthorized",
 							"originalRequest": {
 								"method": "GET",
@@ -685,12 +699,19 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/persons",
+									"raw": "{{baseUrl}}/persons?query=all-users",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"persons"
+									],
+									"query": [
+										{
+											"description": "(Required) A query to search for persons by.",
+											"key": "query",
+											"value": "all-users"
+										}
 									]
 								}
 							},
@@ -704,10 +725,10 @@
 								}
 							],
 							"cookie": [],
-							"body": "{}"
+							"body": "{\n  \"status\": \"failure\"\n}"
 						},
 						{
-							"id": "17d3d35c-b929-4576-9533-290acba10449",
+							"id": "99295260-0578-469e-9dca-90b8271cff25",
 							"name": "Internal server error",
 							"originalRequest": {
 								"method": "GET",
@@ -719,12 +740,19 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/persons",
+									"raw": "{{baseUrl}}/persons?query=all-users",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"persons"
+									],
+									"query": [
+										{
+											"description": "(Required) A query to search for persons by.",
+											"key": "query",
+											"value": "all-users"
+										}
 									]
 								}
 							},
@@ -737,7 +765,7 @@
 					]
 				}
 			],
-			"id": "03996bd9-d65b-43f5-8a48-ec69a35c8099"
+			"id": "6f81df3a-c45d-4d1a-b631-dfd0d133504f"
 		}
 	],
 	"auth": {
@@ -760,39 +788,11 @@
 			}
 		]
 	},
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "c7f4e2c4-6e21-40bb-a47a-59888f90b424",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "95c693c7-eabf-48ca-90c6-351f57c6463a",
-				"type": "text/javascript",
-				"exec": [
-					"pm.test(\"Status code is 200\", function () {",
-					"    pm.response.to.have.status(200);",
-					"});",
-					"pm.test(\"Response time is less than 200ms\", function () {",
-					"    pm.expect(pm.response.responseTime).to.be.below(200);",
-					"});"
-				]
-			}
-		}
-	],
 	"variable": [
 		{
-			"id": "6b176afe-51a9-4d9a-8ce0-4c7e1fd26649",
+			"id": "a1156170-f837-423f-bab4-06060b071acf",
 			"key": "baseUrl",
-			"value": "https://40f8f434-6f9f-4366-a75e-37360ac74174.mock.pstmn.io",
-			"type": "any"
+			"value": "{{baseUrl}}"
 		}
 	]
 }
