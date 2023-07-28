@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "cbe1bead-22fe-4185-b7af-9fa4297ceedf",
-		"name": "Unit Testing",
+		"_postman_id": "aeaab77c-06f9-407d-8b3e-6ef65cfdbcd1",
+		"name": "Persons API - Examples",
 		"description": "This an API for managing persons that exist in the Union Fashion persons, allowing any desktop, web, mobile, or device application to integrate with persons made via our platform.\n\nContact Support:\n Name: Example Support\n Email: admin@admin.com",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "27254826-cbe1bead-22fe-4185-b7af-9fa4297ceedf"
+		"_uid": "27254826-aeaab77c-06f9-407d-8b3e-6ef65cfdbcd1"
 	},
 	"item": [
 		{
@@ -15,7 +15,7 @@
 					"item": [
 						{
 							"name": "/persons/:personId",
-							"id": "b464dc88-d042-4f1f-b01c-e08ac422ec4b",
+							"id": "22daa777-7579-41a5-a8b6-8745941c4679",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -67,34 +67,19 @@
 							},
 							"response": [
 								{
-									"id": "3e886aa8-5223-4ac7-86d3-c1eedffa7502",
+									"id": "7f8cbc0b-dad8-4d48-814a-f3e6ee316061",
 									"name": "Single person.",
 									"originalRequest": {
-										"auth": {
-											"type": "apikey",
-											"apikey": [
-												{
-													"key": "key",
-													"value": "x-api-key",
-													"type": "string"
-												},
-												{
-													"key": "value",
-													"value": "{{apiKey}}",
-													"type": "string"
-												},
-												{
-													"key": "in",
-													"value": "header",
-													"type": "string"
-												}
-											]
-										},
 										"method": "GET",
 										"header": [
 											{
 												"key": "Accept",
 												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "x-api-key",
+												"value": "<API Key>"
 											}
 										],
 										"url": {
@@ -108,12 +93,10 @@
 											],
 											"variable": [
 												{
-													"key": "personId",
-													"value": "1234-4321-1234-4321"
+													"key": "personId"
 												}
 											]
-										},
-										"description": "Retrieves a single person."
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -128,34 +111,15 @@
 									"body": "{\n  \"status\": \"success\"\n}"
 								},
 								{
-									"id": "eb9462d7-51f5-4825-b0a6-2a63a6ad357a",
+									"id": "7acdddc5-f00c-48da-8a94-71f5ee788296",
 									"name": "Internal server error",
 									"originalRequest": {
-										"auth": {
-											"type": "apikey",
-											"apikey": [
-												{
-													"key": "key",
-													"value": "x-api-key",
-													"type": "string"
-												},
-												{
-													"key": "value",
-													"value": "{{apiKey}}",
-													"type": "string"
-												},
-												{
-													"key": "in",
-													"value": "header",
-													"type": "string"
-												}
-											]
-										},
 										"method": "GET",
 										"header": [
 											{
-												"key": "Accept",
-												"value": "application/json"
+												"description": "Added as a part of security scheme: apikey",
+												"key": "x-api-key",
+												"value": "<API Key>"
 											}
 										],
 										"url": {
@@ -169,25 +133,22 @@
 											],
 											"variable": [
 												{
-													"key": "personId",
-													"value": "1234-4321-1234-4321"
+													"key": "personId"
 												}
 											]
-										},
-										"description": "Retrieves a single person."
+										}
 									},
 									"status": "Internal Server Error",
 									"code": 500,
 									"_postman_previewlanguage": "text",
 									"header": [],
-									"cookie": [],
-									"body": null
+									"cookie": []
 								}
 							]
 						},
 						{
 							"name": "/persons/:personId",
-							"id": "bcf4abb3-d319-4681-b1d4-7c2eb016f230",
+							"id": "cd280d50-8c9e-48bb-8b89-78bbd2227dde",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -249,34 +210,19 @@
 							},
 							"response": [
 								{
-									"id": "e05105f9-c86c-4770-90ac-6c76a8a6d985",
+									"id": "17844c34-81d3-4041-a437-48a994489a36",
 									"name": "Successfully updated.",
 									"originalRequest": {
-										"auth": {
-											"type": "apikey",
-											"apikey": [
-												{
-													"key": "key",
-													"value": "x-api-key",
-													"type": "string"
-												},
-												{
-													"key": "value",
-													"value": "{{apiKey}}",
-													"type": "string"
-												},
-												{
-													"key": "in",
-													"value": "header",
-													"type": "string"
-												}
-											]
-										},
 										"method": "PUT",
 										"header": [
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "x-api-key",
+												"value": "<API Key>"
 											}
 										],
 										"body": {
@@ -300,49 +246,31 @@
 											],
 											"variable": [
 												{
-													"key": "personId",
-													"value": "1234-4321-1234-4321"
+													"key": "personId"
 												}
 											]
-										},
-										"description": "Supports either full or partial updates."
+										}
 									},
 									"status": "OK",
 									"code": 200,
 									"_postman_previewlanguage": "text",
 									"header": [],
-									"cookie": [],
-									"body": null
+									"cookie": []
 								},
 								{
-									"id": "337d7e16-da53-4eb2-88ec-628f07f7c3d9",
+									"id": "71e7c5cd-5d85-41f4-9878-5a5b78dc0922",
 									"name": "Internal server error",
 									"originalRequest": {
-										"auth": {
-											"type": "apikey",
-											"apikey": [
-												{
-													"key": "key",
-													"value": "x-api-key",
-													"type": "string"
-												},
-												{
-													"key": "value",
-													"value": "{{apiKey}}",
-													"type": "string"
-												},
-												{
-													"key": "in",
-													"value": "header",
-													"type": "string"
-												}
-											]
-										},
 										"method": "PUT",
 										"header": [
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "x-api-key",
+												"value": "<API Key>"
 											}
 										],
 										"body": {
@@ -366,25 +294,22 @@
 											],
 											"variable": [
 												{
-													"key": "personId",
-													"value": "1234-4321-1234-4321"
+													"key": "personId"
 												}
 											]
-										},
-										"description": "Supports either full or partial updates."
+										}
 									},
 									"status": "Internal Server Error",
 									"code": 500,
 									"_postman_previewlanguage": "text",
 									"header": [],
-									"cookie": [],
-									"body": null
+									"cookie": []
 								}
 							]
 						},
 						{
 							"name": "/persons/:personId",
-							"id": "3f693aa1-c727-49ac-8b2d-741d5a59dcfd",
+							"id": "6c9de262-f08a-408e-8b89-5a2886047d66",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -431,31 +356,17 @@
 							},
 							"response": [
 								{
-									"id": "46c8f7de-1181-4cef-8af8-85888fc68700",
+									"id": "3c2266b8-b3cd-4b90-89d1-792fe648344f",
 									"name": "Person deleted.",
 									"originalRequest": {
-										"auth": {
-											"type": "apikey",
-											"apikey": [
-												{
-													"key": "key",
-													"value": "x-api-key",
-													"type": "string"
-												},
-												{
-													"key": "value",
-													"value": "{{apiKey}}",
-													"type": "string"
-												},
-												{
-													"key": "in",
-													"value": "header",
-													"type": "string"
-												}
-											]
-										},
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "x-api-key",
+												"value": "<API Key>"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/persons/:personId",
 											"host": [
@@ -467,46 +378,29 @@
 											],
 											"variable": [
 												{
-													"key": "personId",
-													"value": "1234-4321-1234-4321"
+													"key": "personId"
 												}
 											]
-										},
-										"description": "Delete an individual person."
+										}
 									},
 									"status": "No Content",
 									"code": 204,
 									"_postman_previewlanguage": "text",
 									"header": [],
-									"cookie": [],
-									"body": null
+									"cookie": []
 								},
 								{
-									"id": "22275531-36b8-4dff-aa5a-1399ee7fa490",
+									"id": "ce3dae06-4ee8-4713-b180-87115c31ed14",
 									"name": "Internal server error",
 									"originalRequest": {
-										"auth": {
-											"type": "apikey",
-											"apikey": [
-												{
-													"key": "key",
-													"value": "x-api-key",
-													"type": "string"
-												},
-												{
-													"key": "value",
-													"value": "{{apiKey}}",
-													"type": "string"
-												},
-												{
-													"key": "in",
-													"value": "header",
-													"type": "string"
-												}
-											]
-										},
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"description": "Added as a part of security scheme: apikey",
+												"key": "x-api-key",
+												"value": "<API Key>"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/persons/:personId",
 											"host": [
@@ -518,28 +412,25 @@
 											],
 											"variable": [
 												{
-													"key": "personId",
-													"value": "1234-4321-1234-4321"
+													"key": "personId"
 												}
 											]
-										},
-										"description": "Delete an individual person."
+										}
 									},
 									"status": "Internal Server Error",
 									"code": 500,
 									"_postman_previewlanguage": "text",
 									"header": [],
-									"cookie": [],
-									"body": null
+									"cookie": []
 								}
 							]
 						}
 					],
-					"id": "323336a3-f7b1-439b-a456-df291085d9f0"
+					"id": "8cf125dd-d402-4aa9-86a1-f41460058eaa"
 				},
 				{
 					"name": "/persons",
-					"id": "7e304535-7272-40b1-9004-1784b6027615",
+					"id": "41d26a4b-19e5-4998-9ed1-72a0b787a241",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -598,29 +489,9 @@
 					},
 					"response": [
 						{
-							"id": "4d4b39b6-1e9b-435a-b8ce-8150c92f71e6",
+							"id": "c912a110-f284-4f97-8405-de1db615bbd7",
 							"name": "Successful creation of person.",
 							"originalRequest": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "key",
-											"value": "x-api-key",
-											"type": "string"
-										},
-										{
-											"key": "value",
-											"value": "{{apiKey}}",
-											"type": "string"
-										},
-										{
-											"key": "in",
-											"value": "header",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -630,6 +501,11 @@
 									{
 										"key": "Accept",
 										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "x-api-key",
+										"value": "<API Key>"
 									}
 								],
 								"body": {
@@ -650,8 +526,7 @@
 									"path": [
 										"persons"
 									]
-								},
-								"description": "Creates a new person."
+								}
 							},
 							"status": "Created",
 							"code": 201,
@@ -666,29 +541,9 @@
 							"body": "{\n  \"status\": \"success\"\n}"
 						},
 						{
-							"id": "8401c6ad-37d1-405b-a949-f33670f11513",
+							"id": "2e2d3e15-1d4f-4a85-8565-bc706cf78c91",
 							"name": "Internal server error",
 							"originalRequest": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "key",
-											"value": "x-api-key",
-											"type": "string"
-										},
-										{
-											"key": "value",
-											"value": "{{apiKey}}",
-											"type": "string"
-										},
-										{
-											"key": "in",
-											"value": "header",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -696,8 +551,9 @@
 										"value": "application/json"
 									},
 									{
-										"key": "Accept",
-										"value": "application/json"
+										"description": "Added as a part of security scheme: apikey",
+										"key": "x-api-key",
+										"value": "<API Key>"
 									}
 								],
 								"body": {
@@ -718,21 +574,19 @@
 									"path": [
 										"persons"
 									]
-								},
-								"description": "Creates a new person."
+								}
 							},
 							"status": "Internal Server Error",
 							"code": 500,
 							"_postman_previewlanguage": "text",
 							"header": [],
-							"cookie": [],
-							"body": null
+							"cookie": []
 						}
 					]
 				},
 				{
 					"name": "/persons",
-					"id": "211ad954-9baf-4e89-a0fb-31973ca3059c",
+					"id": "e3278354-ce92-40ad-8add-12318d9a8f2f",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -774,9 +628,9 @@
 							],
 							"query": [
 								{
+									"description": "(Required) A query to search for persons by.",
 									"key": "query",
-									"value": "all-users",
-									"description": "(Required) A query to search for persons by."
+									"value": "all-users"
 								}
 							]
 						},
@@ -784,34 +638,19 @@
 					},
 					"response": [
 						{
-							"id": "965785c1-09cc-4a10-8f32-38c49dd41d24",
+							"id": "5049a2bb-d26f-49cb-9c15-64fbd9bcdde1",
 							"name": "Get list of all persons",
 							"originalRequest": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "key",
-											"value": "x-api-key",
-											"type": "string"
-										},
-										{
-											"key": "value",
-											"value": "{{apiKey}}",
-											"type": "string"
-										},
-										{
-											"key": "in",
-											"value": "header",
-											"type": "string"
-										}
-									]
-								},
 								"method": "GET",
 								"header": [
 									{
 										"key": "Accept",
 										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "x-api-key",
+										"value": "<API Key>"
 									}
 								],
 								"url": {
@@ -829,8 +668,7 @@
 											"value": "all-users"
 										}
 									]
-								},
-								"description": "Pulls a list of all person"
+								}
 							},
 							"status": "OK",
 							"code": 200,
@@ -845,34 +683,19 @@
 							"body": "{\n  \"status\": \"success\"\n}"
 						},
 						{
-							"id": "c0b3f034-80a3-4448-bafd-9ce58ba790c6",
+							"id": "09ce5d3a-ba95-4967-99f6-45f40a0f5796",
 							"name": "Unauthorized",
 							"originalRequest": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "key",
-											"value": "x-api-key",
-											"type": "string"
-										},
-										{
-											"key": "value",
-											"value": "{{apiKey}}",
-											"type": "string"
-										},
-										{
-											"key": "in",
-											"value": "header",
-											"type": "string"
-										}
-									]
-								},
 								"method": "GET",
 								"header": [
 									{
 										"key": "Accept",
 										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "x-api-key",
+										"value": "<API Key>"
 									}
 								],
 								"url": {
@@ -890,8 +713,7 @@
 											"value": "all-users"
 										}
 									]
-								},
-								"description": "Pulls a list of all person"
+								}
 							},
 							"status": "Forbidden",
 							"code": 403,
@@ -906,34 +728,15 @@
 							"body": "{\n  \"status\": \"failure\"\n}"
 						},
 						{
-							"id": "cb32a821-acd2-45af-a708-918b5a336f51",
+							"id": "ff17145f-3745-4eee-b454-a67b8467bac9",
 							"name": "Internal server error",
 							"originalRequest": {
-								"auth": {
-									"type": "apikey",
-									"apikey": [
-										{
-											"key": "key",
-											"value": "x-api-key",
-											"type": "string"
-										},
-										{
-											"key": "value",
-											"value": "{{apiKey}}",
-											"type": "string"
-										},
-										{
-											"key": "in",
-											"value": "header",
-											"type": "string"
-										}
-									]
-								},
 								"method": "GET",
 								"header": [
 									{
-										"key": "Accept",
-										"value": "application/json"
+										"description": "Added as a part of security scheme: apikey",
+										"key": "x-api-key",
+										"value": "<API Key>"
 									}
 								],
 								"url": {
@@ -951,20 +754,18 @@
 											"value": "all-users"
 										}
 									]
-								},
-								"description": "Pulls a list of all person"
+								}
 							},
 							"status": "Internal Server Error",
 							"code": 500,
 							"_postman_previewlanguage": "text",
 							"header": [],
-							"cookie": [],
-							"body": null
+							"cookie": []
 						}
 					]
 				}
 			],
-			"id": "831aa543-b7dc-43f8-8e16-9a5831a823d0"
+			"id": "93d03ac7-b922-4f75-ba11-95aadf537110"
 		}
 	],
 	"auth": {
@@ -987,37 +788,9 @@
 			}
 		]
 	},
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "b9addff5-341d-448b-bddb-8fb3620b0c69",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "adb63a19-e540-4ccc-9934-60a9234c72f8",
-				"type": "text/javascript",
-				"exec": [
-					"pm.test(\"Status code is 200\", function () {",
-					"    pm.response.to.have.status(200);",
-					"});",
-					"",
-					"pm.test(\"Response time is less than 2s\", function () {",
-					"    pm.expect(pm.response.responseTime).to.be.below(2000);",
-					"});"
-				]
-			}
-		}
-	],
 	"variable": [
 		{
-			"id": "3c858273-a92d-4f6a-8f1a-69ce0140bc37",
+			"id": "7736a483-1ec5-45f0-bebe-a99725f2bd0b",
 			"key": "baseUrl",
 			"value": "{{baseUrl}}"
 		}
