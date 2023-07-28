@@ -764,7 +764,8 @@
 		{
 			"id": "8a424a12-8115-410a-aa93-4f8b8ab49d60",
 			"key": "baseUrl",
-			"value": "{{baseUrl}}"
+			"value": "{{baseUrl}}",
+			"type": "any"
 		}
 	]
 }
