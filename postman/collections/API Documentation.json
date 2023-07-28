@@ -1,0 +1,1006 @@
+{
+	"info": {
+		"_postman_id": "fad87172-a685-422d-b9f8-81dd2e339209",
+		"name": "API Documentation",
+		"description": "This an API for managing persons that exist in the Union Fashion persons, allowing any desktop, web, mobile, or device application to integrate with persons made via our platform.\n\nContact Support:  \nName: Example Support  \nEmail: [admin@admin.com](mailto:admin@admin.com)\n\nThis API Users Azure AD for Authentication. Follow this link to get a key:",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "27254826-fad87172-a685-422d-b9f8-81dd2e339209"
+	},
+	"item": [
+		{
+			"name": "persons",
+			"item": [
+				{
+					"name": "{personId}",
+					"item": [
+						{
+							"name": "/persons/:personId",
+							"id": "0a48274f-13cf-46c4-9a63-b5c863fb1532",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/persons/:personId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"persons",
+										":personId"
+									],
+									"variable": [
+										{
+											"id": "3516b6b5-5c84-45e7-a3cd-bedca4a818a5",
+											"key": "personId",
+											"value": "1234-4321-1234-4321"
+										}
+									]
+								},
+								"description": "Retrieves a single person."
+							},
+							"response": [
+								{
+									"id": "bce61d1c-390c-46a1-be4f-f9bd77ae733e",
+									"name": "Single person.",
+									"originalRequest": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "key",
+													"value": "x-api-key",
+													"type": "string"
+												},
+												{
+													"key": "value",
+													"value": "{{apiKey}}",
+													"type": "string"
+												},
+												{
+													"key": "in",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/persons/:personId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"persons",
+												":personId"
+											],
+											"variable": [
+												{
+													"id": "3516b6b5-5c84-45e7-a3cd-bedca4a818a5",
+													"key": "personId",
+													"value": "1234-4321-1234-4321"
+												}
+											]
+										},
+										"description": "Retrieves a single person."
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"status\": \"success\"\n}"
+								},
+								{
+									"id": "da1c234b-d57f-450a-bd32-fc0a1dfa0096",
+									"name": "Internal server error",
+									"originalRequest": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "key",
+													"value": "x-api-key",
+													"type": "string"
+												},
+												{
+													"key": "value",
+													"value": "{{apiKey}}",
+													"type": "string"
+												},
+												{
+													"key": "in",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/persons/:personId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"persons",
+												":personId"
+											],
+											"variable": [
+												{
+													"id": "3516b6b5-5c84-45e7-a3cd-bedca4a818a5",
+													"key": "personId",
+													"value": "1234-4321-1234-4321"
+												}
+											]
+										},
+										"description": "Retrieves a single person."
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "/persons/:personId",
+							"id": "cfa8c4a8-3dcb-448d-a0d8-f9190157728f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"unitSalePrice\": 29.99\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/persons/:personId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"persons",
+										":personId"
+									],
+									"variable": [
+										{
+											"id": "7d8ab924-d358-4ced-8495-12693c64ab3d",
+											"key": "personId",
+											"value": "1234-4321-1234-4321"
+										}
+									]
+								},
+								"description": "Supports either full or partial updates."
+							},
+							"response": [
+								{
+									"id": "ac2cda7f-fbc2-4cf7-a4bb-e9cef6c7b478",
+									"name": "Successfully updated.",
+									"originalRequest": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "key",
+													"value": "x-api-key",
+													"type": "string"
+												},
+												{
+													"key": "value",
+													"value": "{{apiKey}}",
+													"type": "string"
+												},
+												{
+													"key": "in",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"unitSalePrice\": 29.99\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/persons/:personId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"persons",
+												":personId"
+											],
+											"variable": [
+												{
+													"id": "7d8ab924-d358-4ced-8495-12693c64ab3d",
+													"key": "personId",
+													"value": "1234-4321-1234-4321"
+												}
+											]
+										},
+										"description": "Supports either full or partial updates."
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": null
+								},
+								{
+									"id": "976854a1-818e-4a97-8a29-8aa8d706ab4e",
+									"name": "Internal server error",
+									"originalRequest": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "key",
+													"value": "x-api-key",
+													"type": "string"
+												},
+												{
+													"key": "value",
+													"value": "{{apiKey}}",
+													"type": "string"
+												},
+												{
+													"key": "in",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"unitSalePrice\": 29.99\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/persons/:personId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"persons",
+												":personId"
+											],
+											"variable": [
+												{
+													"id": "7d8ab924-d358-4ced-8495-12693c64ab3d",
+													"key": "personId",
+													"value": "1234-4321-1234-4321"
+												}
+											]
+										},
+										"description": "Supports either full or partial updates."
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "/persons/:personId",
+							"id": "54d88333-3ea0-486e-a339-cd095cd07f80",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/persons/:personId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"persons",
+										":personId"
+									],
+									"variable": [
+										{
+											"id": "bc5bc688-4581-4a96-a953-8ebb19343f65",
+											"key": "personId",
+											"value": "1234-4321-1234-4321"
+										}
+									]
+								},
+								"description": "Delete an individual person."
+							},
+							"response": [
+								{
+									"id": "ee485361-0a32-4193-a9d4-868915ad9d9c",
+									"name": "Person deleted.",
+									"originalRequest": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "key",
+													"value": "x-api-key",
+													"type": "string"
+												},
+												{
+													"key": "value",
+													"value": "{{apiKey}}",
+													"type": "string"
+												},
+												{
+													"key": "in",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/persons/:personId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"persons",
+												":personId"
+											],
+											"variable": [
+												{
+													"id": "bc5bc688-4581-4a96-a953-8ebb19343f65",
+													"key": "personId",
+													"value": "1234-4321-1234-4321"
+												}
+											]
+										},
+										"description": "Delete an individual person."
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": null
+								},
+								{
+									"id": "69fe7d88-8092-452a-8217-7a73433d1c6b",
+									"name": "Internal server error",
+									"originalRequest": {
+										"auth": {
+											"type": "apikey",
+											"apikey": [
+												{
+													"key": "key",
+													"value": "x-api-key",
+													"type": "string"
+												},
+												{
+													"key": "value",
+													"value": "{{apiKey}}",
+													"type": "string"
+												},
+												{
+													"key": "in",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/persons/:personId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"persons",
+												":personId"
+											],
+											"variable": [
+												{
+													"id": "bc5bc688-4581-4a96-a953-8ebb19343f65",
+													"key": "personId",
+													"value": "1234-4321-1234-4321"
+												}
+											]
+										},
+										"description": "Delete an individual person."
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"id": "2ed46157-152b-4f67-b027-6e4f99e1e7c7"
+				},
+				{
+					"name": "/persons",
+					"id": "2e841368-2e95-4bcc-bddd-b09c7ebae0e8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category\": \"Jeans\",\n  \"brand\": \"Union\",\n  \"color\": \"black\",\n  \"gender\": \"m\",\n  \"unitPrice\": 49.99,\n  \"unitSalePrice\": 29.99\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/persons",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"persons"
+							]
+						},
+						"description": "Creates a new person."
+					},
+					"response": [
+						{
+							"id": "03e4be5f-58b7-471d-8fc2-01e37b546b72",
+							"name": "Successful creation of person.",
+							"originalRequest": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"Jeans\",\n  \"brand\": \"Union\",\n  \"color\": \"black\",\n  \"gender\": \"m\",\n  \"unitPrice\": 49.99,\n  \"unitSalePrice\": 29.99\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/persons",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"persons"
+									]
+								},
+								"description": "Creates a new person."
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"status\": \"success\"\n}"
+						},
+						{
+							"id": "1d4d1d9d-b4cb-4cc7-ba29-4d077679c975",
+							"name": "Internal server error",
+							"originalRequest": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"Jeans\",\n  \"brand\": \"Union\",\n  \"color\": \"black\",\n  \"gender\": \"m\",\n  \"unitPrice\": 49.99,\n  \"unitSalePrice\": 29.99\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/persons",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"persons"
+									]
+								},
+								"description": "Creates a new person."
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "/persons",
+					"id": "2af95ce0-57b5-407e-8727-22acc3f71536",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/persons?query=all-users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"persons"
+							],
+							"query": [
+								{
+									"description": "(Required) A query to search for persons by.",
+									"key": "query",
+									"value": "all-users"
+								}
+							]
+						},
+						"description": "Pulls a list of all person"
+					},
+					"response": [
+						{
+							"id": "b52870b5-e76a-40bc-86ec-9d3972a35bd0",
+							"name": "Get list of all persons",
+							"originalRequest": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/persons?query=all-users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"persons"
+									],
+									"query": [
+										{
+											"description": "(Required) A query to search for persons by.",
+											"key": "query",
+											"value": "all-users"
+										}
+									]
+								},
+								"description": "Pulls a list of all person"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"status\": \"success\"\n}"
+						},
+						{
+							"id": "0eac7123-d428-4024-9924-751044371f3d",
+							"name": "Unauthorized",
+							"originalRequest": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/persons?query=all-users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"persons"
+									],
+									"query": [
+										{
+											"description": "(Required) A query to search for persons by.",
+											"key": "query",
+											"value": "all-users"
+										}
+									]
+								},
+								"description": "Pulls a list of all person"
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"status\": \"failure\"\n}"
+						},
+						{
+							"id": "1e8845d6-b110-4401-bd94-57ed3d864916",
+							"name": "Internal server error",
+							"originalRequest": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/persons?query=all-users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"persons"
+									],
+									"query": [
+										{
+											"description": "(Required) A query to search for persons by.",
+											"key": "query",
+											"value": "all-users"
+										}
+									]
+								},
+								"description": "Pulls a list of all person"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"id": "6156701f-9dfe-4cb6-b1b7-2f752b4023bb"
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "x-api-key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"id": "319a26c4-04d0-44d7-aa51-4a408ad7fd68",
+			"key": "baseUrl",
+			"value": "{{baseUrl}}"
+		}
+	]
+}
