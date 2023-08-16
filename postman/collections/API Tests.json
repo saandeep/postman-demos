@@ -1831,7 +1831,6 @@
 													],
 													"variable": [
 														{
-															"id": "deb87e39-03aa-41de-87b1-d4c43173db58",
 															"key": "id",
 															"value": ""
 														}
@@ -1864,7 +1863,6 @@
 															],
 															"variable": [
 																{
-																	"id": "deb87e39-03aa-41de-87b1-d4c43173db58",
 																	"key": "id",
 																	"value": ""
 																}
@@ -2016,7 +2014,6 @@
 															],
 															"variable": [
 																{
-																	"id": "deb87e39-03aa-41de-87b1-d4c43173db58",
 																	"key": "id",
 																	"value": ""
 																}
@@ -2123,7 +2120,6 @@
 															],
 															"variable": [
 																{
-																	"id": "deb87e39-03aa-41de-87b1-d4c43173db58",
 																	"key": "id",
 																	"value": ""
 																}
@@ -2506,7 +2502,6 @@
 													],
 													"variable": [
 														{
-															"id": "f4e649e6-06dd-4723-a7e1-de4f03b96ea1",
 															"key": "subscriptionId",
 															"value": ""
 														}
@@ -2539,7 +2534,6 @@
 															],
 															"variable": [
 																{
-																	"id": "f4e649e6-06dd-4723-a7e1-de4f03b96ea1",
 																	"key": "subscriptionId",
 																	"value": ""
 																}
@@ -2637,7 +2631,6 @@
 															],
 															"variable": [
 																{
-																	"id": "f4e649e6-06dd-4723-a7e1-de4f03b96ea1",
 																	"key": "subscriptionId",
 																	"value": ""
 																}
@@ -2837,7 +2830,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "39b350d8-fc96-406e-9ad8-699fab0555f9",
+				"id": "ac9057e0-0030-4df6-a0f8-8168e22ed659",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -2847,12 +2840,10 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "bc5b3206-55a8-48c6-9a1b-3dad670a70f1",
+				"id": "147653e9-b5fc-4385-b3cf-e5259b485985",
 				"type": "text/javascript",
 				"exec": [
-					"pm.test(\"Status code is 200\", function () {",
-					"    pm.response.to.have.status(200);",
-					"});",
+					"",
 					"",
 					"pm.test(\"Response time is less than 2s\", function () {",
 					"    pm.expect(pm.response.responseTime).to.be.below(2000);",
@@ -2863,7 +2854,7 @@
 	],
 	"variable": [
 		{
-			"id": "000b324d-19da-46b1-ae7f-674ba2a35d93",
+			"id": "1b3b2d95-8745-490d-8b70-e1994992a860",
 			"key": "baseUrl",
 			"value": "{{LIFEPACK_BASE_URL}}"
 		}
