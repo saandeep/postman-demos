@@ -1,0 +1,2063 @@
+---
+openapi: 3.0.3
+info:
+  title: Lifepack API
+  description: "# Overview\n## Lifepack Open API Description\n\nLifepack provides a portal for our partners to see all prescription history as well as analytics of their shipment and consumption activities.\n\n## Partner Account Types\n\nCurrently, there is two different partner account types available for partners to apply:\n1. Standard Partner Account - Partner who's applying this kind of account should have their customer coordinate address data to send to us while sending [Submit Prescription Data](https://api-docs.lifepack.id/?version=latest#01382ce2-fb36-45cd-9077-a31495d47413) requests and also they should have their own payment system.\n2. Payment on Us Partner Account - Partner who applying this kind of account are the ones that still don't have their own payment system. Sending patient address coordinates while sending [Submit Prescription Data](https://api-docs.lifepack.id/?version=latest#01382ce2-fb36-45cd-9077-a31495d47413) requests are also optional.\n\n## Bussiness Flow\n\n### Subscription Creation Flow\n\n![Subscription Flow](https://drive.google.com/uc?export=view&id=1PCmQw8yN6hPYXVll3Mjr_iVn7cJnHDpx)\n\n### Payment Flow\n\nCurrently, there are two payment flow available to use on our system. The default payment flow and payment flow with payment on us option. If your system or existing data doesn't have user's address coordinate picker and payment system, you can apply for payment on us option to be enabled by contacting our business team.\n\n#### Default Payment Flow\n\nThe default payment flow starts after the prescription has reviewed and approved by our pharmacists. You can directly hit our [Change Payment Status to Paid](https://api-docs.lifepack.id/?version=latest#60c7c2e6-5e27-47d9-9713-7b898a1f6f16) endpoint after your customer's payment is already paid and verified in your system.\n\n![Payment Flow](https://drive.google.com/uc?export=view&id=1yp8QoGvr5vK6DiuuKHt4kJV_w7SsWDoR)\n\n#### Payment on Us Flow\n\nThe payment on us flow also starts after the prescription has reviewed and approved by our pharmacists. But, the entire process on address picking will happen in our system. You can just listen to webhook callback from us for the subscription status updates.\n\n![Payment on Us Flow](https://drive.google.com/uc?export=view&id=1BQ-iEc2-b8UYNHXco6HSg5nfzNB4dz2j)\n\n## UX Guideline\n\n### Registration Flow\n\n![Registration Flow](https://drive.google.com/uc?export=view&id=1xC6ypOAh5hAq4sizGogpF8zkz697ENsu)\n\n### Create Digital Prescription Flow\n\n![Create Digital Prescription Flow 1](https://drive.google.com/uc?export=view&id=1GtZR5rYW5HJ1vFwyc-1xxoLMrPf5una0)\n\n![Create Digital Prescription Flow 2](https://drive.google.com/uc?export=view&id=1CV_GqYcUpOwXJpZQpMStcuTevPDkyY17)\n\n![Create Digital Prescription Flow 3](https://drive.google.com/uc?export=view&id=1x6jfnpqq-U_uBMq5JSa9JbfqIEqD6vkO)\n\n### Create Photo Prescription Flow\n\n![Create Photo Prescription Flow 1](https://drive.google.com/uc?export=view&id=12w_cpriIa3QiOME4p6_mFl7RkSVw8QYl)\n\n![Create Photo Prescription Flow 2](https://drive.google.com/uc?export=view&id=1Zpcy4AJaa4CnEodos9SwW4Z4fGRZyfuS)\n\n# Features\n\n## Easy to Integrate API\n\n- Our RESTful API’s enable our partners to integrate to our solution seamlessly;\n- Lifepack API support: Prescription, Subscription, Payment, Patient, Product.\n\n## Dashboard\n\n- Lifepack provides a portal for our partners to see all prescription history as well as analytics of their shipment and consumption activities;\n\n# Setting Up\n\nOnce a partner has registered, it will have an access to our sandbox environment. Lifepack partner dashboard will also be accessible.\n\n## Getting Notification\n\nLIfepack allows partners to receive realtime notifications about Lifepack related information, by configuring a endpoint url on the Lifepack Partner Dashboard.\n\nWe are sending notifications to Webhook URL. This endpoint will only be triggered if there are status changes to existing subscription. Please refer to [subscription status reference section](https://api-docs.lifepack.id/?version=latest#subscription-status) for which statuses are sent in the notification.\n\nOnce configured, Lifepack will send a HTTP POST payload to the url, containing detail about specific event which can be seen in the notification payload section.\n\n**Configuring the Endpoint URL**\n\n- To setup an Endpoint URL on Lifepack, head over to the **SETTINGS** tab on the sidebar, and edit the values on **WEBHOOK URL**.\n- Save the notification URL using the **Submit** button. The notification URL can be modified anytime from the settings page.\n\n## Notification Payload\n\nExample Payload:\n\n```json\n{\n  \"subscription_id\": 1791,\n  \"status\": \"payment_order\",\n  \"patient\": {\n    \"id\": \"652\",\n    \"name\": \"Jono Hipertensi\",\n    \"phone_number\": \"+628537333452\",\n    \"address\": {\n      \"id\": 4849,\n      \"default\": false,\n      \"latitude\": -6.406614,\n      \"longitude\": 106.822083,\n      \"first_line\": \"Telaga Golf\",\n      \"second_line\": \"Jl. Hr. Rasuna Sahid\",\n      \"postal_code\": \"16412\",\n      \"note\": \"Graha Irama\",\n      \"street_name\": \" \",\n      \"province\": \"West Java\",\n      \"city\": \"Depok City\",\n      \"district\": \"Sukmajaya\",\n      \"sub_district\": null\n    }\n  },\n  \"total_payment\": 356250,\n  \"products\": [\n    {\n      \"id\": 1179,\n      \"name\": \"VERAPAMIL HCL\",\n      \"qty\": 2,\n      \"consumption_day\": 5,\n      \"total_qty\": 10\n    },\n    {\n      \"id\": 1013,\n      \"name\": \"SHAROX 500 MG\",\n      \"qty\": 2,\n      \"consumption_day\": 5,\n      \"total_qty\": 10\n    }\n  ],\n  \"timestamp\": \"2020-08-27 17:49:56\"\n}\n```\n\n### Payload Description\n\n| Parameter       | Description                                                                                                                            |\n|-----------------|----------------------------------------------------------------------------------------------------------------------------------------|\n| subscription_id | Subscription ID of the notification                                                                                                    |\n| patient         | `object` Please refer to [patient entity](https://api-docs.lifepack.id/#patient-entity)                                                |\n| status          | Refer to [subscription status reference section](https://api-docs.lifepack.id/?version=latest#subscription-status) for possible values |\n| total_payment   | Amount of the total payment for current subscription                                                                                   |\n| timestamp       | `string` Last update time                                                                                                              |\n|                 | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                      |\n\n### Product Entity\n\n| id              | Product ID                              |\n|-----------------|-----------------------------------------|\n| name            | Product name                            |\n| qty             | Quantity taken per day                  |\n| consumption_day | Total days user should taking medicine  |\n| total_qty       | Total quantity of product given to user |\n\n## Error Code and Message\n\n### Description Of Usual Server Responses (HTTP Codes)\n\n- `200 OK` - the request was successful (some API calls may return 201 instead).\n- `201 Created` - the request was successful and a resource was created.\n- `202 Accepted` - the request was accepted and enqueue for processing later.\n- `204 No Content` - the request was successful but there is no representation to return (i.e. the response is empty).\n- `400 Bad Request` - the request could not be understood or was missing required parameters.\n- `401 Unauthorized` - authentication failed.\n- `403 Forbidden` - access denied.\n- `402 Payment Required` - payment is required.\n- `404 Not Found` - resource was not found.\n- `410 Gone` - the resource has been expired.\n- `422 Unprocessable Entity` - i.e. validation errors.\n- `500 Internal Server Error` - Bad bad bad.\n- `503 Service Unavailable` - service is temporary unavailable (e.g. scheduled Platform Maintenance). Try again later.\n\n### Error Structure\n\nAside from the `4XX` and `5XX` error HTTP Headers, we have an unified error structure:\n\n```\n{\n  \"error_code\": \"INTERNAL_SERVER_ERROR\",\n  \"message\": \"Internal Server Error\"\n}\n```\n\nThis means that, if you get an `4XX` or `5XX` errors, you can utilize your system to log or display the error message to the user. Possible error codes will be explained in each endpoints.\n\n# Reference\n\n## Subscription Status\n\n| Status                | Description                                                                     | Status appears on subscription detail? | Will receive notification? |\n|-----------------------|---------------------------------------------------------------------------------|----------------------------------------|----------------------------|\n| in_review             | Prescription is under review (products and total payment still not exists)      | ✅                                      | ❌                          |\n| prescription_approved | Prescription approved by pharmacist                                             | ✅                                      | ✅                          |\n| prescription_adjusted | Prescription is adjusted, partner should update prescription detail information | ❌                                      | ✅                          |\n| order_cancelled       | Prescription cancelled by pharmacist                                            | ✅                                      | ✅                          |\n| order_expired         | Order is not continued within the time specified at `expired_at`                | ✅                                      | ✅                          |\n| prescription_rejected | Prescription is rejected by admin                                               | ✅                                      | ✅                          |\n| pending_address       | User need to update address                                                     | ✅                                      | ✅                          |\n| payment_order         | Prescription is approved by admin and ready to be charged                       | ✅                                      | ✅                          |\n| waiting_for_payment   | User already selected payment method (only for payment on us partner type)      | ✅                                      | ✅                          |\n| payment_successful    | Order has successfully paid by user                                             | ✅                                      | ✅                          |\n| payment_expired       | Payment has expired (only for payment on us partner type)                       | ✅                                      | ✅                          |\n| payment_failed        | Payment has failed (only for payment on us partner type)                        | ✅                                      | ✅                          |\n| order_processed       | Pharmacist is preparing the order                                               | ✅                                      | ✅                          |\n| waiting_for_pickup    | Package is ready to ship, waiting the courier to pick up                        | ✅                                      | ✅                          |\n| picked_up             | Package is picked up by courier                                                 | ✅                                      | ✅                          |\n| on_delivery           | Package is on delivery to customer address                                      | ✅                                      | ✅                          |\n| delivered             | Package has already delivered to customer address                               | ✅                                      | ✅                          |\n| delivery_failed       | Package delivery has failed                                                     | ✅                                      | ✅                          |\n| active                | User click confirm button in lifepack app/automatically after 24 h delivered    | ✅                                      | ✅                          |\n| inactive              | Medication schedule ended                                                       | ✅                                      | ✅                          |\n\n# Authorization\n\nFor the authorization headers for authenticating the requests, please refer to our [Authorization](https://api-docs.lifepack.id/?version=latest#authorization-header) section."
+  version: 1.0.0
+  contact:
+    name: Example Support
+    email: support@example.com
+    url: support.example.com
+  license:
+    name: Apache 2.0
+    url: https://opensource.org/licenses/Apache-2.0
+  termsOfService: https://example.com/tos
+servers:
+  - url: "{{LIFEPACK_BASE_URL}}"
+paths:
+  /partner/v1/address/cities:
+    get:
+      tags:
+        - Lifepack API
+        - Address
+      summary: City Coverage
+      description: "You can get list of supported city coverage for our service. Then, should pass the `id` to `city_id` parameter in submit prescription data endpoint.\r\n\r\n### Response Parameters\r\n\r\n| Parameter | Description                      |\r\n|-----------|----------------------------------|\r\n| id        | `integer` City Coverage ID       |\r\n| name      | `string` City name               |\r\n|           | Maximum length is 255 characters |"
+      operationId: cityCoverage
+      responses:
+        "200":
+          description: Success Get City Coverage
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: close
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "125"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Tue, 21 Jul 2020 07:53:39 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"7d-XOTtoruEKGCVdFoyVNsYgORh4N8\""
+            Referrer-Policy:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: no-referrer
+            Server:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nginx
+            Strict-Transport-Security:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: max-age=31536000
+            X-Content-Type-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nosniff
+            X-Frame-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: SAMEORIGIN
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+            X-XSS-Protection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: 1; mode=block
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "1"
+                    name:
+                      type: string
+                      example: DKI Jakarta
+                example:
+                  - id: "1"
+                    name: DKI Jakarta
+                  - id: "2"
+                    name: Tangerang & Banten
+                  - id: "3"
+                    name: Jawa Barat
+                  - id: "4"
+                    name: Jawa Tengah - Jawa Timur - Bali
+                  - id: "5"
+                    name: Sumatera
+                  - id: "6"
+                    name: Kalimantan
+                  - id: "7"
+                    name: Indonesia Timur Lainnya
+              examples:
+                Success Get City Coverage:
+                  value:
+                    - id: "1"
+                      name: DKI Jakarta
+                    - id: "2"
+                      name: Tangerang & Banten
+                    - id: "3"
+                      name: Jawa Barat
+                    - id: "4"
+                      name: Jawa Tengah - Jawa Timur - Bali
+                    - id: "5"
+                      name: Sumatera
+                    - id: "6"
+                      name: Kalimantan
+                    - id: "7"
+                      name: Indonesia Timur Lainnya
+        "500":
+          description: Internal server error
+  /partner/v1/patient:
+    get:
+      tags:
+        - Lifepack API
+        - Patient
+      summary: Patient Information
+      description: "You can search for past patients information that have submitted their prescription with your partner credentials into our system at least once with this endpoint. You can pass `patient_id` query parameter to filter the patient, or you just can leave it blank to show all the patient data.\n\n### Response Parameters\n\n| Parameter | Description                              |\n|-----------|------------------------------------------|\n| []        | `object[]` Refer to patient entity below |\n\n#### Patient Entity\n\n| Parameter    | Description                                                      |\n|--------------|------------------------------------------------------------------|\n| id           | `integer` Patient ID                                             |\n| name         | `string` Name of the patient                                     |\n|              | Maximum length is 36 characters                                  |\n| phone_number | `string` Phone number of the patient                             |\n|              | Value should be started with \"+\" followed with series of numbers |\n|              | Maximum length is 15 characters                                  |\n| allergy      | `optional` `string` Patient's allergy                            |\n| age          | `optional` `integer` Patient's age                               |\n|              | Value should be greater than or equal to 0                       |\n| gender       | `enum` Patient's gender                                          |\n|              | Valid values: `male`, `female`                                   |"
+      operationId: patientInformation
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            $ref: '#/components/schemas/Example'
+            type: string
+            example: "10"
+          description: "`optional` `number` Data limit (default: 10)"
+        - name: offset
+          in: query
+          schema:
+            $ref: '#/components/schemas/Example'
+            type: string
+            example: "0"
+          description: "`optional` `number` Data offset (default: 0)"
+        - name: patient_id
+          in: query
+          schema:
+            $ref: '#/components/schemas/Example'
+            type: string
+            example: "3"
+          description: "`optional` `number` Patient ID"
+      responses:
+        "200":
+          description: Get List All Patient Information
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "115"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Wed, 20 May 2020 09:18:07 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"73-Uk2+lq1tyk5AGvCime2K8cysS5k\""
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: array
+                items:
+                  type: object
+                  properties:
+                    age:
+                      type: number
+                      example: 45
+                    allergy:
+                      type: string
+                      example: Alergi kacang
+                    gender:
+                      type: string
+                      example: male
+                    id:
+                      type: number
+                      example: 3
+                    name:
+                      type: string
+                      example: Jono Diabetes
+                    phone_number:
+                      type: string
+                      example: "+628712312312"
+                example:
+                  - age: 45
+                    allergy: Alergi kacang
+                    gender: male
+                    id: 3
+                    name: Jono Diabetes
+                    phone_number: "+628712312312"
+              examples:
+                Get List All Patient Information:
+                  value:
+                    - age: 45
+                      allergy: Alergi kacang
+                      gender: male
+                      id: 3
+                      name: Jono Diabetes
+                      phone_number: "+628712312312"
+        "500":
+          description: Internal server error
+    post:
+      tags:
+        - Lifepack API
+        - Patient
+      summary: Register Patient
+      description: "You can register patient with this endpoint. Main user should be added too in the patients array. If the operations succeeded, it will returns empty response with `204 No Response` status code.\n\n### Request Parameters\n\n| Parameter    | Description                                                      |\n|--------------|------------------------------------------------------------------|\n| name         | `string` Patient Name                                            |\n|              | Maximum length is 100 characters                                 |\n| phone_number | `string` Patient phone number                                    |\n|              | Value should be started with \"+\" followed with series of numbers |\n|              | Maximum length is 15 characters                                  |\n| insurance    | `object` Refer to insurance object below                         |\n| patients[]   | `array` Refer to patients entity below                           |\n\n#### Insurance Entity\n\n| Parameter     | Description                                                                                                                            |\n|---------------|----------------------------------------------------------------------------------------------------------------------------------------|\n| company_name  | `string` Insurance company name                                                                                                        |\n|               | Value should be matches with insurance that has already informed to us. Please let us know if you have a new insurance name registered |\n| policy_number | `string` Insurance policy number                                                                                                       |\n\n#### Patient Entity\n\n| Parameter     | Description                                                      |\n|---------------|------------------------------------------------------------------|\n| name          | `string` Name of the patient                                     |\n|               | Maximum length is 36 characters                                  |\n| phone_number  | `string` Phone number of the patient                             |\n|               | Value should be started with \"+\" followed with series of numbers |\n|               | Maximum length is 15 characters                                  |\n| member_number | `string` Insurance member number                                 |\n| family_type   | `enum` Family type                                               |\n|               | Possible values: `self`, `spouse`, `child`                       |\n| child_order   | `optional` `integer` Child order                                 |\n| age           | `optional` `number` Patient's age                                |\n|               | Value should be greater than or equal to 0                       |\n| age_unit      | `optional` `enum` Patient's age unit                             |\n|               | Valid values: `years`, `months`, `days`. Default: `years`        |\n| weight        | `optional` `number` Patient's body weight in kilograms           |\n|               | Value should be greater than or equal to 0                       |"
+      operationId: registerPatient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Example'
+              type: object
+              properties:
+                insurance:
+                  type: object
+                  properties:
+                    company_name:
+                      type: string
+                      example: BNI Life
+                    policy_number:
+                      type: string
+                      example: "003105"
+                name:
+                  type: string
+                  example: Yudia
+                patients:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      family_type:
+                        type: string
+                        example: self
+                      member_number:
+                        type: string
+                        example: "031322"
+                      name:
+                        type: string
+                        example: yudia
+                      phone_number:
+                        type: string
+                        nullable: true
+                        example: "+628569240856"
+                  example:
+                    - family_type: self
+                      member_number: "031322"
+                      name: yudia
+                      phone_number: "+628569240856"
+                    - family_type: spouse
+                      member_number: "861534"
+                      name: karno
+                      phone_number: "+628547236273"
+                    - family_type: child
+                      member_number: "761235"
+                      name: Kenan
+                      phone_number: ~
+                phone_number:
+                  type: string
+                  example: "+628569240856"
+            example:
+              insurance:
+                company_name: BNI Life
+                policy_number: "003105"
+              name: Yudia
+              patients:
+                - family_type: self
+                  member_number: "031322"
+                  name: yudia
+                  phone_number: "+628569240856"
+                - family_type: spouse
+                  member_number: "861534"
+                  name: karno
+                  phone_number: "+628547236273"
+                - family_type: child
+                  member_number: "761235"
+                  name: Kenan
+                  phone_number: ~
+              phone_number: "+628569240856"
+      responses:
+        "204":
+          description: Success Register Patient
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: close
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Tue, 01 Sep 2020 04:03:33 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk\""
+            Referrer-Policy:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: no-referrer
+            Server:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nginx
+            Strict-Transport-Security:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: max-age=31536000
+            X-Content-Type-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nosniff
+            X-Frame-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: SAMEORIGIN
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+            X-XSS-Protection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: 1; mode=block
+        "400":
+          description: User Already Registered (Duplicate Phone Number)
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: close
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "75"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Tue, 01 Sep 2020 04:04:35 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"4b-I81R4s5+keY66ztLD67I0ea3pLU\""
+            Server:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nginx
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  errorCode:
+                    type: string
+                    example: USER_ALREADY_REGISTERED
+                  message:
+                    type: string
+                    example: User already registered
+              examples:
+                User Already Registered (Duplicate Phone Number):
+                  value:
+                    errorCode: USER_ALREADY_REGISTERED
+                    message: User already registered
+        "500":
+          description: Internal server error
+  /partner/v1/payment:
+    put:
+      tags:
+        - Lifepack API
+        - Payment
+      summary: Change Payment Status to Paid
+      description: "This endpoint is used to change payment status to paid for Standard Partner account type. If you have Payment on Us partner account type, you are forbidden to hit this endpoint. Please refer to [this](#partner-account-types) section for more information.\n\nIdeally, this endpoint is should be called after you got a subscription notification which the status changes to `payment_order` and you have successfully charge your customer for the payment. This endpoint only supposed to called once, when the status is `payment_order`.\n\n### Signature\n\nWhen calling this endpoint, you will need to send a hashed signature with this algorithm:\n```\nSHA512(ServerKey + SubscriptionId + Amount)\n\nServerKey = Partner Server Key\nSubscriptionId = refers to *id* in Subscription Detail\nAmount = refers to *payment.total_price* in Subscription Detail\n```\nNote: Amount should has 2 decimal places.\n\n#### Sample Code for Generating Signature (node.js)\n\n```\nconst Crypto = require('crypto');\n\nfunction generateSignature(serverKey, subscriptionId, amount) {\n    const stringKey = `${serverKey}${subscriptionId}${amount}`;\n    return Crypto.createHash('sha512').update(stringKey).digest('hex');\n}\n\nconst serverKey = '36fec90790f0ada49b009b146';\nconst subscriptionId = 12;\nconst amount = '100000.00';\n\nconsole.log(`Signature Key: ${generateSignature(serverKey, subscriptionId, amount)}`);\n```\n\n### Request Parameters\n\n| Parameter       | Description                                    |\n|-----------------|------------------------------------------------|\n| subscription_id | `integer` Subscription ID                      |\n| signature_key   | `string` Signature for current subscription ID |\n\n### Response\n\nIt will return `400 Bad Request` error if the subscription ID or signature key is not valid. Otherwise, the response will be `200 OK` with the structure below if payment status has successfully changed.\n\n| Parameter | Description                                            |\n|-----------|--------------------------------------------------------|\n| status    | `enum` Payment request status                          |\n|           | Possible values: `SUCCESS`, `FAILED`                   |\n| error     | `nullable` Refer to error entity below                 |\n|           | Will only be sent if the `status` response is `FAILED` |\n\n#### Error Entity\n\n| Parameter  | Description                        |\n|------------|------------------------------------|\n| error_code | `enum` Error code                  |\n|            | Refer to error codes section below |\n| message    | `string` Error message             |\n\n#### Error Codes\n\n| Error Code                         | Description                                              |\n|------------------------------------|----------------------------------------------------------|\n| SUBSCRIPTION_ALREADY_PAID          | Subscription is already paid before                      |\n| SUBSCRIPTION_NOT_READY_TO_PAID     | Subscription is still on review and not ready to be paid |\n| SUBSCRIPTION_NOT_FOUND             | Subscription is not found                                |\n| SUBSCRIPTION_SIGNATURE_KEY_INVALID | Signature key invalid                                    |"
+      operationId: changePaymentStatusToPaid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Example'
+              type: object
+              properties:
+                signature_key:
+                  type: string
+                  example: bf6c5a49d5a4d7a0debeb19d6fdc1008730565d36a6255530e3943fbd627eb489fc89129286df9e72ddc42d735c45d60d92938d6e103ac966ae4919a8d3c564c
+                subscription_id:
+                  type: number
+                  example: 12
+            example:
+              signature_key: bf6c5a49d5a4d7a0debeb19d6fdc1008730565d36a6255530e3943fbd627eb489fc89129286df9e72ddc42d735c45d60d92938d6e103ac966ae4919a8d3c564c
+              subscription_id: 12
+      responses:
+        "200":
+          description: Failed Change Payment Status
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "117"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Thu, 14 May 2020 03:32:30 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"75-HZH3y/v7rIcxgWLpsta3OvT91kY\""
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      error_code:
+                        type: string
+                        example: SUBSCRIPTION_NOT_READY_TO_PAID
+                      message:
+                        type: string
+                        example: Subscription is still on review and not ready to be paid
+                  status:
+                    type: string
+                    example: FAILED
+              examples:
+                Failed Change Payment Status:
+                  value:
+                    error:
+                      error_code: SUBSCRIPTION_NOT_READY_TO_PAID
+                      message: Subscription is still on review and not ready to be paid
+                    status: FAILED
+        "400":
+          description: Subscription not Found
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "77"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Thu, 14 May 2020 03:33:10 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"4d-7m/y44GLTQ1U0X3UBGrgknqf2ns\""
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: SUBSCRIPTION_NOT_FOUND
+                  message:
+                    type: string
+                    example: Subscription is not found
+              examples:
+                Subscription not Found:
+                  value:
+                    error_code: SUBSCRIPTION_NOT_FOUND
+                    message: Subscription is not found
+        "500":
+          description: Internal server error
+  /partner/v1/prescription:
+    post:
+      tags:
+        - Lifepack API
+        - Prescription
+      summary: Submit Prescription Data
+      description: "You can submit prescription photos or prescription medication informations to get a subscription using this endpoint. After you have submitted your prescription, you will get a subscription with `in_review` status that would be reviewed by our pharmacists.\n\nWe are using Reverse Geocoding to convert latitude and longitude values to address details. Therefore, you are only required to fill the latitude and longitude address and not required to fill the address detail. But if you prefer and/or have more accurate data, we will use the address details value that you send to us instead of the reverse geocoded ones. If you don't have any customer address coordinate data, you can apply for Payment on Us partner account type so you can send address entity without coordinate data. Please refer to [this](#partner-account-types) section for more information.\n\n### Request Parameters\n\n| Parameter             | Description                                                                                   |\n|-----------------------|-----------------------------------------------------------------------------------------------|\n| prescription_photo_id | `optional` `number` Prescription Photo ID                                                     |\n|                       | Required if `products` and `medications` parameter is set to `null`            |\n| city_id               | `optional` `integer` City ID                                                                  |\n|                       | Please refer to [this](#68973471-4bc6-4071-ba30-127c8063fd9d) section to obtain city ID       |\n|                       | If this field is not set, default value will be gathered from doctor's first clinic location. |\n|                       | This will also affects the delivery price                                                     |\n| products              | `optional` `object[]` Refer to product entity below                                           |\n|                       | Required if `prescription_photo_id` and `medications` is set to `null`                        |\n| medications           | `optional` `string` Medications list (free text and accepts `\\n`)                             |\n|                       | Required if `prescription_photo_id` and `products` is set to `null`                           |\n| doctor                | `object` Refer to doctor entity below                                                         |\n| patient               | `object` Refer to patient entity below                                                        |\n| insurance             | `nullable` `object` Refer to insurance entity below                                           |\n\n#### Product Entity\n\n| Parameter       | Description                                                                                |\n|-----------------|--------------------------------------------------------------------------------------------|\n| product_id      | `integer` Product ID                                                                       |\n| quantity        | `integer` Medicine quantity                                                                |\n|                 | Value should be greater than 0                                                             |\n| dosage_per_day  | `integer` Medicine dosage per day                                                          |\n|                 | Value should be greater than 0                                                             |\n| dosage_per_unit | `decimal` Medicine dosage per unit                                                         |\n|                 | Value should be greater than 0                                                             |\n| direction       | `string` Medicine direction                                                                |\n|                 | Example: `1 on morning, 2 on evening`                                                      |\n|                 | Length should be greater than 0                                                            |\n| notes           | `optional` `string` Medicine notes                                                         |\n|                 | Fill this if only there is any concerned notes that is not covered within attributes above |\n|                 | Example: `finish the medicine`                                                             |\n\n#### Doctor Entity\n\n| Parameter    | Description                                                                                |\n|--------------|--------------------------------------------------------------------------------------------|\n| name         | `string` Name of the doctor                                                                |\n|              | Won't override existing doctor data if the doctor with current phone number already exists |\n|              | Length should be within 3 to 36 characters                                                 |\n|              | Only alphanumeric and space characters are allowed                                         |\n| phone_number | `string` Phone number of the doctor                                                        |\n|              | Value should be started with \"+\" followed with series of numbers                           |\n|              | Length should be within 9 to 15 characters                                                 |\n| specialty    | `optional` `string` Doctor specialization                                                  |\n|              | Length should be less than or equal to 100                                                 |\n| sip          | `optional` `string` Doctor SIP                                                             |\n|              | Length should be less than or equal to 100                                                 |\n\n#### Patient Entity\n\n| Parameter    | Description                                                                                                                           |\n|--------------|---------------------------------------------------------------------------------------------------------------------------------------|\n| name         | `string` Name of the patient                                                                                                          |\n|              | Length should be within 3 to 36 characters                                                                                            |\n| phone_number | `string` Phone number of the patient                                                                                                  |\n|              | Value should be started with \"+\" followed with series of numbers                                                                      |\n|              | Length should be within 9 to 15 characters                                                                                            |\n|              | `optional` `string` Patient's allergy                                                                                                 |\n| allergy      | `integer` Patient's age                                                                                                               |\n| diagnose     | `string` Patient diagnose                                                                                                             |\n|              | Length should be within 3 to 255 characters                                                                                           |\n| age          | `number` Patient's age                                                                                                                |\n|              | Value should be greater than or equal to 0                                                                                            |\n| age_unit     | `optional` `enum` Patient's age unit                                                                                                  |\n|              | Valid values: `years`, `months`, `days`. Default: `years`                                                                             |\n| weight       | `number` Patient's body weight in kilograms                                                                                           |\n|              | Value should be greater than or equal to 0                                                                                            |\n| gender       | `enum` Patient's gender                                                                                                               |\n|              | Valid values: `male`, `female`                                                                                                        |\n| address      | `object` Refer to address entity below                                                                                                |\n|              | Only `optional` if partner account type is Payment on Us. Please refer to [this](#partner-account-types) section for more information |\n\n#### Address Entity\n\n| Parameter    | Description                                                                                                                           |\n|--------------|---------------------------------------------------------------------------------------------------------------------------------------|\n| latitude     | `number` Address latitude                                                                                                             |\n|              | Only `optional` if partner account type is Payment on Us. Please refer to [this](#partner-account-types) section for more information |\n|              | Value should be within -90 and 90                                                                                                     |\n| longitude    | `number` Address longitude                                                                                                            |\n|              | Only `optional` if partner account type is Payment on Us. Please refer to [this](#partner-account-types) section for more information |\n|              | Value should be within -180 and 180                                                                                                   |\n| first_line   | `optional` `string` Address first line                                                                                                |\n|              | Length should be less than or equal to 255                                                                                            |\n| second_line  | `optional` `string` Address second line                                                                                               |\n|              | Length should be less than or equal to 255                                                                                            |\n| note         | `optional` `string` Address notes                                                                                                     |\n|              | Length should be less than or equal to 255                                                                                            |\n| province     | `optional` `string` Address province                                                                                                  |\n|              | Length should be less than or equal to 255                                                                                            |\n| district     | `optional` `string` Address district                                                                                                  |\n|              | Length should be less than or equal to 255                                                                                            |\n| sub_district | `optional` `string` Address sub district                                                                                              |\n|              | Length should be less than or equal to 255                                                                                            |\n| postal_code  | `optional` `string` Address postal code                                                                                               |\n|              | Length should be less than or equal to 255                                                                                            |\n\n### Insurance Entity\n| Parameter       | Description                                                                                                                            |\n|-----------------|----------------------------------------------------------------------------------------------------------------------------------------|\n| company_name    | `optional` `string` Insurance company name                                                                                             |\n|                 | Value should be matches with insurance that has already informed to us. Please let us know if you have a new insurance name registered |\n| policy_number   | `optional` `string` Insurance policy number                                                                                            |\n| member_number   | `optional` `string` Insurance member number                                                                                            |\n| card_number     | `string` Insurance card number                                                                                                         |\n|                 | Only required if insurance company name is filled                                                                                      |\n| insurance_class | `string` Insurance class                                                                                                               |\n|                 | Only required if insurance company name is filled                                                                                      |\n| type            | `string` Insurance type                                                                                                                |\n|                 | Only required if insurance company name is filled                                                                                      |\n| benefit         | `optional` `string` Insurance benefits                                                                                                 |\n\n### Response Parameters\n\n| Parameter       | Description               |\n|-----------------|---------------------------|\n| subscription_id | `integer` Subscription ID |\n| patient_id      | `integer` Patient ID      |\n| doctor_id       | `integer` Doctor ID       |"
+      operationId: submitPrescriptionData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Example'
+              type: object
+              properties:
+                city_id:
+                  type: number
+                  example: 1
+                doctor:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: Faldy
+                    phone_number:
+                      type: string
+                      example: "+676767754567"
+                    sip:
+                      type: string
+                      example: SIPDOKTER
+                    specialty:
+                      type: string
+                      example: Cardiologist
+                insurance:
+                  type: object
+                  properties:
+                    benefit:
+                      type: string
+                      example: ""
+                    card_number:
+                      type: string
+                      example: "1221212"
+                    company_name:
+                      type: string
+                      example: Asuransiku
+                    insurance_class:
+                      type: string
+                      example: group
+                    member_number:
+                      type: string
+                      example: "89892893"
+                    policy_number:
+                      type: string
+                      example: "123132321313"
+                    type:
+                      type: string
+                      example: Non-VIP
+                patient:
+                  type: object
+                  properties:
+                    address:
+                      type: object
+                      properties:
+                        district:
+                          type: string
+                          example: South Jakarta
+                        first_line:
+                          type: string
+                          example: Menara Palma
+                        latitude:
+                          type: number
+                          example: -6.170166
+                        longitude:
+                          type: number
+                          example: 106.831375
+                        note:
+                          type: string
+                          example: Graha Irama
+                        postal_code:
+                          type: string
+                          example: "98767"
+                        province:
+                          type: string
+                          example: DKI Jakarta
+                        second_line:
+                          type: string
+                          example: Jl. Hr. Rasuna Said Blok X2 No. 6
+                        sub_district:
+                          type: string
+                          example: Setiabudi
+                    age:
+                      type: number
+                      example: 45
+                    allergy:
+                      type: string
+                      example: Alergi debu
+                    diagnose:
+                      type: string
+                      example: Hipertensi
+                    gender:
+                      type: string
+                      example: male
+                    name:
+                      type: string
+                      example: Jono Hipertensi
+                    phone_number:
+                      type: string
+                      example: "+628712312312"
+                    weight:
+                      type: number
+                      example: 102.2
+                prescription_photo_id:
+                  nullable: true
+                  example: ~
+                products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      direction:
+                        type: string
+                        example: setelah makan
+                      dosage_per_day:
+                        type: number
+                        example: 3
+                      dosage_per_unit:
+                        type: number
+                        example: 1
+                      notes:
+                        type: string
+                        example: habiskan
+                      product_id:
+                        type: number
+                        example: 1
+                      quantity:
+                        type: number
+                        example: 50
+                  example:
+                    - direction: setelah makan
+                      dosage_per_day: 3
+                      dosage_per_unit: 1
+                      notes: habiskan
+                      product_id: 1
+                      quantity: 50
+                    - direction: setelah makan
+                      dosage_per_day: 3
+                      dosage_per_unit: 1
+                      notes: habiskan
+                      product_id: 2
+                      quantity: 50
+            example:
+              city_id: 1
+              doctor:
+                name: Faldy
+                phone_number: "+676767754567"
+                sip: SIPDOKTER
+                specialty: Cardiologist
+              insurance:
+                benefit: ""
+                card_number: "1221212"
+                company_name: Asuransiku
+                insurance_class: group
+                member_number: "89892893"
+                policy_number: "123132321313"
+                type: Non-VIP
+              patient:
+                address:
+                  district: South Jakarta
+                  first_line: Menara Palma
+                  latitude: -6.170166
+                  longitude: 106.831375
+                  note: Graha Irama
+                  postal_code: "98767"
+                  province: DKI Jakarta
+                  second_line: Jl. Hr. Rasuna Said Blok X2 No. 6
+                  sub_district: Setiabudi
+                age: 45
+                allergy: Alergi debu
+                diagnose: Hipertensi
+                gender: male
+                name: Jono Hipertensi
+                phone_number: "+628712312312"
+                weight: 102.2
+              prescription_photo_id: ~
+              products:
+                - direction: setelah makan
+                  dosage_per_day: 3
+                  dosage_per_unit: 1
+                  notes: habiskan
+                  product_id: 1
+                  quantity: 50
+                - direction: setelah makan
+                  dosage_per_day: 3
+                  dosage_per_unit: 1
+                  notes: habiskan
+                  product_id: 2
+                  quantity: 50
+      responses:
+        "200":
+          description: Submit Prescription Data With non-strict Product Details
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: close
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "56"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Tue, 26 May 2020 04:40:29 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"38-gMXWIPKCeZ2z0sZtZ/g8JfqMSGc\""
+            Referrer-Policy:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: no-referrer
+            Server:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nginx
+            Strict-Transport-Security:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: max-age=31536000
+            X-Content-Type-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nosniff
+            X-Frame-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: SAMEORIGIN
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+            X-XSS-Protection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: 1; mode=block
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  doctor_id:
+                    type: number
+                    example: 244
+                  patient_id:
+                    type: number
+                    example: 183
+                  subscription_id:
+                    type: number
+                    example: 351
+              examples:
+                Submit Prescription Data With non-strict Product Details:
+                  value:
+                    doctor_id: 244
+                    patient_id: 183
+                    subscription_id: 351
+        "400":
+          description: One of the Products not Found
+          headers:
+            access-control-allow-origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            content-length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "64"
+            date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Tue, 01 Sep 2020 10:00:40 GMT"
+            etag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"40-1grZnfSF7+98rWMOqIMEHnjJDxA\""
+            strict-transport-security:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: max-age=2592000
+            x-forwarded-proto:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: https
+            x-powered-by:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: PRODUCT_NOT_FOUND
+                  message:
+                    type: string
+                    example: Product not found
+              examples:
+                One of the Products not Found:
+                  value:
+                    error_code: PRODUCT_NOT_FOUND
+                    message: Product not found
+        "500":
+          description: Internal server error
+  /partner/v1/prescription-photo:
+    post:
+      tags:
+        - Lifepack API
+        - Prescription
+      summary: Upload Prescription Photo
+      description: "By hitting this endpoint, you can add photos to the prescription, and you can add multiple images too. You must hit this first before you hit create new prescription endpoint. You can add multiple images by sending multiple `prescription` parameter in your request body.\n\n### Response Parameters\n\n| Parameter             | Description                     |\n|-----------------------|---------------------------------|\n| prescription_photo_id | `integer` Prescription Photo ID |"
+      operationId: uploadPrescriptionPhoto
+      requestBody:
+        content:
+          application/octet-stream: {}
+      responses:
+        "200":
+          description: Upload Multiple Prescription Photo
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: close
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "30"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Thu, 28 May 2020 08:18:02 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"1e-+ywOPMiudbevh4E9Kkqs0xYbwvE\""
+            Referrer-Policy:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: no-referrer
+            Server:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nginx
+            Strict-Transport-Security:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: max-age=31536000
+            X-Content-Type-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nosniff
+            X-Frame-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: SAMEORIGIN
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+            X-XSS-Protection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: 1; mode=block
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  prescription_photo_id:
+                    type: number
+                    example: 1641
+              examples:
+                Upload Multiple Prescription Photo:
+                  value:
+                    prescription_photo_id: 1641
+        "400":
+          description: Incorrect Image Format
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "100"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Thu, 14 May 2020 01:57:22 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"64-0pzb7lB6AUfLICzm8Lg1/Kqmwfk\""
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: PRESCRIPTION_IMAGE_FORMAT_INCORRECT
+                  message:
+                    type: string
+                    example: Prescription image format incorrect
+              examples:
+                Incorrect Image Format:
+                  value:
+                    error_code: PRESCRIPTION_IMAGE_FORMAT_INCORRECT
+                    message: Prescription image format incorrect
+        "500":
+          description: Internal Server Error
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "72"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Thu, 14 May 2020 01:59:21 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"48-AGgvIH6i59zjlHB9eSttZ7AjawA\""
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: INTERNAL_SERVER_ERROR
+                  message:
+                    type: string
+                    example: Internal Server Error
+              examples:
+                Internal Server Error:
+                  value:
+                    error_code: INTERNAL_SERVER_ERROR
+                    message: Internal Server Error
+  /partner/v1/product:
+    get:
+      tags:
+        - Lifepack API
+        - Product
+      summary: Product List
+      description: "You can search for our registered products using this endpoint. You should pass `keyword` query parameter to search the products, or you just can fill it with `%` to show all the products data without filtering. You should also pass `city_id` param that obtained from [Get City Coverage](https://api-docs.lifepack.id/#3dc6feaa-ac70-4738-ad87-2b6aa008229f) endpoint.\n\n### Response Parameters\n\n| Parameter          | Description                          |\n|--------------------|--------------------------------------|\n| id                 | `integer` Product ID                 |\n| name               | `string` Product name                |\n|                    | Maximum length is 100 characters     |\n| description        | `string` Product description         |\n| type               | `string` Product type                |\n|                    | Maximum length is 100 characters     |\n| stock_availability | `boolean` Product stock avaliability |"
+      operationId: productList
+      parameters:
+        - name: keyword
+          in: query
+          schema:
+            $ref: '#/components/schemas/Example'
+            type: string
+            example: paracetamol
+          description: "`required` `string` Product search keyword"
+        - name: city_id
+          in: query
+          schema:
+            $ref: '#/components/schemas/Example'
+            type: string
+            example: "2"
+          description: "`required` `number` City ID"
+        - name: limit
+          in: query
+          schema:
+            $ref: '#/components/schemas/Example'
+            type: string
+            example: "10"
+          description: "`optional` `number` Data limit (default: 10)"
+        - name: offset
+          in: query
+          schema:
+            $ref: '#/components/schemas/Example'
+            type: string
+            example: "0"
+          description: "`optional` `number` Data offset (default: 0)"
+      responses:
+        "200":
+          description: Get Product List With Specific Keyword
+          headers:
+            access-control-allow-origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            content-length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "273"
+            date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Mon, 13 Jul 2020 10:11:55 GMT"
+            etag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"111-CXR8qX95VUF3/PkH4pJuNZsJa7I\""
+            strict-transport-security:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: max-age=2592000
+            x-forwarded-proto:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: https
+            x-powered-by:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: array
+                items:
+                  type: object
+                  properties:
+                    description:
+                      nullable: true
+                      example: ~
+                    id:
+                      type: number
+                      example: 886
+                    name:
+                      type: string
+                      example: PARACETAMOL 500 MG PRMD
+                    stock_availability:
+                      type: boolean
+                      example: true
+                    type:
+                      type: string
+                      example: tablet
+                example:
+                  - description: ~
+                    id: 886
+                    name: PARACETAMOL 500 MG PRMD
+                    stock_availability: true
+                    type: tablet
+                  - description: ~
+                    id: 887
+                    name: PARACETAMOL ESA
+                    stock_availability: true
+                    type: tablet
+                  - description: ~
+                    id: 888
+                    name: PARACETAMOL TAB
+                    stock_availability: true
+                    type: tablet
+              examples:
+                Get Product List With Specific Keyword:
+                  value:
+                    - description: ~
+                      id: 886
+                      name: PARACETAMOL 500 MG PRMD
+                      stock_availability: true
+                      type: tablet
+                    - description: ~
+                      id: 887
+                      name: PARACETAMOL ESA
+                      stock_availability: true
+                      type: tablet
+                    - description: ~
+                      id: 888
+                      name: PARACETAMOL TAB
+                      stock_availability: true
+                      type: tablet
+        "400":
+          description: No City ID Passed
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: close
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "62"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Wed, 27 Jan 2021 09:41:14 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"3e-tPQxIpG8dCt702v6L2YVt3ng3v4\""
+            Server:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nginx
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: CITY_ID_REQUIRED
+                  message:
+                    type: string
+                    example: City ID required
+              examples:
+                No City ID Passed:
+                  value:
+                    error_code: CITY_ID_REQUIRED
+                    message: City ID required
+        "500":
+          description: Internal server error
+  "/partner/v1/product/{id}":
+    get:
+      tags:
+        - Lifepack API
+        - Product
+      summary: Product Detail
+      description: "You can get product detail information from this endpoint.\n\n### Response Parameters\n\n| Parameter          | Description                          |\n|--------------------|--------------------------------------|\n| id                 | `integer` Product ID                 |\n| name               | `string` Product name                |\n|                    | Maximum length is 100 characters     |\n| description        | `string` Product description         |\n| type               | `string` Product type                |\n|                    | Maximum length is 100 characters     |\n| stock_availability | `boolean` Product stock avaliability |"
+      operationId: productDetail
+      responses:
+        "200":
+          description: Success Get Product Detail
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: close
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "66"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Fri, 22 May 2020 04:45:04 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"42-zcCe2RBDp5x1qdz4Pg/WppWrjH0\""
+            Referrer-Policy:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: no-referrer
+            Server:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nginx
+            Strict-Transport-Security:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: max-age=31536000
+            X-Content-Type-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nosniff
+            X-Frame-Options:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: SAMEORIGIN
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+            X-XSS-Protection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: 1; mode=block
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: ""
+                  id:
+                    type: number
+                    example: 1
+                  name:
+                    type: string
+                    example: Arthozan Gc+Msm
+                  stock_availability:
+                    type: boolean
+                    example: true
+                  type:
+                    type: string
+                    example: kapsul
+              examples:
+                Success Get Product Detail:
+                  value:
+                    description: ""
+                    id: 1
+                    name: Arthozan Gc+Msm
+                    stock_availability: true
+                    type: kapsul
+        "400":
+          description: Product Not Found
+          headers:
+            access-control-allow-origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            content-length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "64"
+            date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Tue, 01 Sep 2020 09:59:44 GMT"
+            etag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"40-1grZnfSF7+98rWMOqIMEHnjJDxA\""
+            strict-transport-security:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: max-age=2592000
+            x-forwarded-proto:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: https
+            x-powered-by:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: PRODUCT_NOT_FOUND
+                  message:
+                    type: string
+                    example: Product not found
+              examples:
+                Product Not Found:
+                  value:
+                    error_code: PRODUCT_NOT_FOUND
+                    message: Product not found
+        "500":
+          description: Failed Get Product Detail
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: close
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "72"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Fri, 22 May 2020 04:45:23 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"48-AGgvIH6i59zjlHB9eSttZ7AjawA\""
+            Server:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: nginx
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: INTERNAL_SERVER_ERROR
+                  message:
+                    type: string
+                    example: Internal Server Error
+              examples:
+                Failed Get Product Detail:
+                  value:
+                    error_code: INTERNAL_SERVER_ERROR
+                    message: Internal Server Error
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Example'
+          type: string
+          example: "1"
+        description: "`number` Product ID"
+  /partner/v1/subscription:
+    get:
+      tags:
+        - Lifepack API
+        - Subscription
+      summary: Subscription History
+      description: "You can get all of the subscription histories using this endpoint.\n\n### Response Parameters\n\n| Parameter          | Description                                                                                                                                                                              |\n|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| id                 | `integer` Subscription ID                                                                                                                                                                |\n| status             | `enum` Refer to [subscription status reference section](https://api-docs.lifepack.id/?version=latest#subscription-status) for possible values                                            |\n| full_name          | `string` Patient's full name                                                                                                                                                             |\n|                    | Maximum length is 36 characters                                                                                                                                                          |\n| total_price        | `number` Total price                                                                                                                                                                     |\n| currency           | `string` Currency used for payment                                                                                                                                                       |\n|                    | Possibble values: `IDR`, `USD`, `SGD`                                                                                                                                                    |\n| end_date           | `string` Latest medication taking date time                                                                                                                                              |\n|                    | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                                                                        |\n| updated_at         | `string` Data last updated at timestamp                                                                                                                                                  |\n|                    | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                                                                        |\n| expired_at         | `nullable` `string` Data order will expired at. Only have value if the status is already `pending_addrress` or `payment_order`. Will be emptied again if status is `payment_successful`. |\n|                    | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                                                                        |\n| estimated_delivery | `string` Estimated package delivery time                                                                                                                                                 |\n|                    | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                                                                        |\n| is_notified        | `boolean` If `true`, user has been notified when medication is already arrived                                                                                                           |"
+      operationId: subscriptionHistory
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            $ref: '#/components/schemas/Example'
+            type: string
+            example: "10"
+          description: "Maximum number of data (optional, default: 999)"
+        - name: offset
+          in: query
+          schema:
+            $ref: '#/components/schemas/Example'
+            type: string
+            example: "0"
+          description: "Data offset (optional, default: 0)"
+      responses:
+        "200":
+          description: Success Get Subscription History
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "1848"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Mon, 08 Jun 2020 02:21:39 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"738-TkQFOPdCDcPFMEaaQh5YXA/lubQ\""
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: array
+                items:
+                  type: object
+                  properties:
+                    currency:
+                      type: string
+                      example: IDR
+                    end_date:
+                      type: string
+                      nullable: true
+                      example: "2020-06-08 23:59:59"
+                    estimated_delivery:
+                      type: string
+                      example: "2020-06-08 09:21:39"
+                    expired_at:
+                      type: string
+                      nullable: true
+                      example: ~
+                    full_name:
+                      type: string
+                      example: Jono Diabetes
+                    id:
+                      type: number
+                      example: 411
+                    is_notified:
+                      type: boolean
+                      example: true
+                    start_date:
+                      type: string
+                      example: "2020-06-04 07:00:00"
+                    status:
+                      type: string
+                      example: active
+                    total_price:
+                      type: number
+                      example: 144802
+                    updated_at:
+                      type: string
+                      example: "2020-06-04 11:28:46"
+                example:
+                  - currency: IDR
+                    end_date: "2020-06-08 23:59:59"
+                    estimated_delivery: "2020-06-08 09:21:39"
+                    expired_at: ~
+                    full_name: Jono Diabetes
+                    id: 411
+                    is_notified: true
+                    start_date: "2020-06-04 07:00:00"
+                    status: active
+                    total_price: 144802
+                    updated_at: "2020-06-04 11:28:46"
+                  - currency: IDR
+                    end_date: "2020-06-13 23:59:59"
+                    estimated_delivery: "2020-06-08 09:21:39"
+                    expired_at: ~
+                    full_name: Jono Diabetes
+                    id: 412
+                    is_notified: false
+                    start_date: "2020-06-09 07:00:00"
+                    status: active
+                    total_price: 16502
+                    updated_at: "2020-06-04 15:33:44"
+                  - currency: IDR
+                    end_date: "2020-06-18 23:59:59"
+                    estimated_delivery: "2020-06-08 09:21:39"
+                    expired_at: ~
+                    full_name: Jono Diabetes
+                    id: 414
+                    is_notified: false
+                    start_date: "2020-06-14 07:00:00"
+                    status: active
+                    total_price: 16502
+                    updated_at: "2020-06-04 15:50:52"
+                  - currency: IDR
+                    end_date: "2020-06-08 23:59:59"
+                    estimated_delivery: "2020-06-08 09:21:39"
+                    expired_at: "2020-06-04 17:20:00"
+                    full_name: Jono Diabetes Mark IV
+                    id: 413
+                    is_notified: false
+                    start_date: "2020-06-04 07:00:00"
+                    status: order_expired
+                    total_price: 113509
+                    updated_at: "2020-06-04 16:20:00"
+                  - currency: IDR
+                    end_date: ~
+                    estimated_delivery: "2020-06-08 09:21:39"
+                    expired_at: ~
+                    full_name: Jono Diabetes Mark IV
+                    id: 416
+                    is_notified: false
+                    start_date: "2020-06-09 07:00:00"
+                    status: prescription_approved
+                    total_price: 93509
+                    updated_at: "2020-06-04 16:57:20"
+                  - currency: IDR
+                    end_date: ~
+                    estimated_delivery: "2020-06-08 09:21:39"
+                    expired_at: "2020-07-05 12:01:01"
+                    full_name: Jono Diabetes Mark X
+                    id: 418
+                    is_notified: false
+                    start_date: "2020-06-05 07:00:00"
+                    status: payment_order
+                    total_price: 54666
+                    updated_at: "2020-06-05 12:01:01"
+              examples:
+                Success Get Subscription History:
+                  value:
+                    - currency: IDR
+                      end_date: "2020-06-08 23:59:59"
+                      estimated_delivery: "2020-06-08 09:21:39"
+                      expired_at: ~
+                      full_name: Jono Diabetes
+                      id: 411
+                      is_notified: true
+                      start_date: "2020-06-04 07:00:00"
+                      status: active
+                      total_price: 144802
+                      updated_at: "2020-06-04 11:28:46"
+                    - currency: IDR
+                      end_date: "2020-06-13 23:59:59"
+                      estimated_delivery: "2020-06-08 09:21:39"
+                      expired_at: ~
+                      full_name: Jono Diabetes
+                      id: 412
+                      is_notified: false
+                      start_date: "2020-06-09 07:00:00"
+                      status: active
+                      total_price: 16502
+                      updated_at: "2020-06-04 15:33:44"
+                    - currency: IDR
+                      end_date: "2020-06-18 23:59:59"
+                      estimated_delivery: "2020-06-08 09:21:39"
+                      expired_at: ~
+                      full_name: Jono Diabetes
+                      id: 414
+                      is_notified: false
+                      start_date: "2020-06-14 07:00:00"
+                      status: active
+                      total_price: 16502
+                      updated_at: "2020-06-04 15:50:52"
+                    - currency: IDR
+                      end_date: "2020-06-08 23:59:59"
+                      estimated_delivery: "2020-06-08 09:21:39"
+                      expired_at: "2020-06-04 17:20:00"
+                      full_name: Jono Diabetes Mark IV
+                      id: 413
+                      is_notified: false
+                      start_date: "2020-06-04 07:00:00"
+                      status: order_expired
+                      total_price: 113509
+                      updated_at: "2020-06-04 16:20:00"
+                    - currency: IDR
+                      end_date: ~
+                      estimated_delivery: "2020-06-08 09:21:39"
+                      expired_at: ~
+                      full_name: Jono Diabetes Mark IV
+                      id: 416
+                      is_notified: false
+                      start_date: "2020-06-09 07:00:00"
+                      status: prescription_approved
+                      total_price: 93509
+                      updated_at: "2020-06-04 16:57:20"
+                    - currency: IDR
+                      end_date: ~
+                      estimated_delivery: "2020-06-08 09:21:39"
+                      expired_at: "2020-07-05 12:01:01"
+                      full_name: Jono Diabetes Mark X
+                      id: 418
+                      is_notified: false
+                      start_date: "2020-06-05 07:00:00"
+                      status: payment_order
+                      total_price: 54666
+                      updated_at: "2020-06-05 12:01:01"
+        "500":
+          description: Internal server error
+  "/partner/v1/subscription/{subscriptionId}":
+    get:
+      tags:
+        - Lifepack API
+        - Subscription
+      summary: Subscription Detail
+      description: "You can get the subscription detail data using this endpoint.\n\n### Response Parameters\n\n| Parameter          | Description                                                                                                                                                                              |\n|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| id                 | `integer` Subscription ID                                                                                                                                                                |\n| prescription_id    | `integer` Prescription ID                                                                                                                                                                |\n| products[]         | `array` Refer to product entity below                                                                                                                                                    |\n| payment            | `object` Refer to payment entity below                                                                                                                                                   |\n| reject_reason      | `string` Rejection reason (if rejected)                                                                                                                                                  |\n|                    | Maximum length is 100 characters                                                                                                                                                         |\n| prescription_image | `string[]` Prescription image                                                                                                                                                            |\n| status             | `enum` Refer to [subscription status reference section](https://api-docs.lifepack.id/?version=latest#subscription-status) for possible values                                            |\n| invoice_url        | `nullable` `string` Invoice URL. Will be null when invoice is not yet generated (order still hasn't paid)                                                                                |\n| claim_id           | `nullable` `string` Insurance claim ID                                                                                                                                                   |\n| next_recurring_id  | `nullable` `integer` Contains subscription ID for the next recurring subscription if not null                                                                                            |\n| is_notified        | `boolean` If `true`, user has been notified when medication is already arrived                                                                                                           |\n| patient            | `object` Refer to patient entity below                                                                                                                                                   |\n| estimated_delivery | `string` Estimated package delivery time                                                                                                                                                 |\n|                    | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                                                                        |\n| start_date         | `string` First schedule for medication taking                                                                                                                                            |\n|                    | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                                                                        |\n| end_date           | `string` Last schedule for medication taking                                                                                                                                             |\n|                    | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                                                                        |\n| updated_at         | `string` Data last updated at timestamp                                                                                                                                                  |\n|                    | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                                                                        |\n| expired_at         | `nullable` `string` Data order will expired at. Only have value if the status is already `pending_addrress` or `payment_order`. Will be emptied again if status is `payment_successful`. |\n|                    | Date format `YYYY-MM-DD HH:mm:ss`                                                                                                                                                        |\n| currency           | `string` Currency used for payment                                                                                                                                                       |\n|                    | Possibble values: `IDR`, `USD`, `SGD`                                                                                                                                                    |\n| address            | `optional` `object` Refer to address entity below                                                                                                                                        |\n|                    | If the subscription is created without passing address entity and user hasn't set the address yet, this value will be an empty object (`{}`)                                             |\n\n#### Patient Entity\n\n| Parameter    | Description                                                      |\n|--------------|------------------------------------------------------------------|\n| name         | `string` Name of the patient                                     |\n|              | Maximum length is 36 characters                                  |\n| phone_number | `string` Phone number of the patient                             |\n|              | Value should be started with \"+\" followed with series of numbers |\n|              | Maximum length is 15 characters                                  |\n| allergy      | `optional` `string` Patient's allergy                            |\n| age          | `optional` `integer` Patient's age                               |\n|              | Value should be greater than or equal to 0                       |\n| weight       | `optional` `number` Patient's body weight in kilograms           |\n|              | Value should be greater than or equal to 0                       |\n| gender       | `enum` Patient's gender                                          |\n|              | Valid values: `male`, `female`                                   |\n\n#### Address Entity\n\n| Parameter    | Description                                |\n|--------------|--------------------------------------------|\n| latitude     | `optional` `number` Address latitude       |\n|              | Value should be within -90 and 90          |\n| longitude    | `optional` `number` Address longitude      |\n|              | Value should be within -180 and 180        |\n| first_line   | `optional` `string` Address first line     |\n|              | Length should be less than or equal to 255 |\n| second_line  | `optional` `string` Address second line    |\n|              | Length should be less than or equal to 255 |\n| note         | `optional` `string` Address notes          |\n|              | Length should be less than or equal to 255 |\n| province     | `optional` `string` Address province       |\n|              | Length should be less than or equal to 255 |\n| district     | `optional` `string` Address district       |\n|              | Length should be less than or equal to 255 |\n| sub_district | `optional` `string` Address sub district   |\n|              | Length should be less than or equal to 255 |\n| postal_code  | `optional` `string` Address postal code    |\n|              | Length should be less than or equal to 255 |\n\n#### Product Entity\n\n| Parameter | Description                           |\n|-----------|---------------------------------------|\n| id        | `integer` Product ID                  |\n| name      | `string` Product name                 |\n|           | Maximum length is 100 characters      |\n| price     | `number` Product total price          |\n| currency  | `string` Currency used for payment    |\n|           | Possibble values: `IDR`, `USD`, `SGD` |\n| qty       | `integer` Product quantity            |\n| type      | `string` Product type                 |\n|           | Maximum length is 100 characters      |\n\n#### Payment Entity\n\n| Parameter      | Description                                                                                                                   |\n|----------------|-------------------------------------------------------------------------------------------------------------------------------|\n| id             | `integer` Payment ID                                                                                                          |\n| total_price    | `number` Total price include shipping                                                                                         |\n| subtotal_price | `number` Total price exclude shipping                                                                                         |\n| delivery_price | `number` Delivery price                                                                                                       |\n| expired_at     | `optiional` `string` Payment expiry time                                                                                      |\n|                | Date format `YYYY-MM-DD HH:mm:ss`                                                                                             |\n|                | This value will only present if current status is `waiting_for_payment`                                                       |\n| method         | `optional` `number` Payment method                                                                                            |\n|                | Only appear when payment is already initiated/at least is at `waiting_for_payment` status                                     |\n| logo           | `optional` `string` Bank logo                                                                                                 |\n|                | Only has value when payment is already initiated/at least is at `waiting_for_payment` status and payment method is using bank |\n| account_number | `optional` `string` Bank account number                                                                                       |\n|                | Only has value when payment is already initiated/at least is at `waiting_for_payment` status and payment method is using bank |"
+      operationId: subscriptionDetail
+      responses:
+        "200":
+          description: Success Get Subscription Detail
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "*"
+            Connection:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "1224"
+            Date:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "Mon, 08 Jun 2020 01:49:18 GMT"
+            ETag:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: "W/\"4c8-c5h8Lhmpcatt+A3gitDAORbSKOY\""
+            X-Powered-By:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+                type: object
+                properties:
+                  address:
+                    type: object
+                    properties:
+                      city:
+                        type: string
+                        example: Central Jakarta City
+                      default:
+                        type: boolean
+                        example: false
+                      district:
+                        type: string
+                        example: Sawah Besar
+                      first_line:
+                        type: string
+                        example: Menara Palma
+                      id:
+                        type: number
+                        example: 180
+                      latitude:
+                        type: number
+                        example: -6.170166
+                      longitude:
+                        type: number
+                        example: 106.831375
+                      note:
+                        type: string
+                        example: Graha Irama
+                      postal_code:
+                        type: string
+                        example: "10710"
+                      province:
+                        type: string
+                        example: Jakarta
+                      second_line:
+                        type: string
+                        example: Jl. Hr. Rasuna Said Blok X2 No. 6
+                      street_name:
+                        type: string
+                        example: " "
+                      sub_district:
+                        nullable: true
+                        example: ~
+                  claim_id:
+                    type: string
+                    example: "0030"
+                  currency:
+                    type: string
+                    example: IDR
+                  end_date:
+                    type: string
+                    example: "2020-06-08 23:59:59"
+                  estimated_delivery:
+                    type: string
+                    example: "2020-06-08 08:49:18"
+                  expired_at:
+                    type: string
+                    example: "2020-06-04 15:28:46"
+                  id:
+                    type: number
+                    example: 411
+                  invoice_url:
+                    type: string
+                    example: "https://api.lifepack.id/images/invoice/202008/20200814-invoice-770.jpg"
+                  is_notified:
+                    type: boolean
+                    example: true
+                  next_recurring_id:
+                    type: number
+                    example: 412
+                  patient:
+                    type: object
+                    properties:
+                      full_name:
+                        type: string
+                        example: Jono Diabetes
+                      id:
+                        type: string
+                        example: "183"
+                      phone_number:
+                        type: string
+                        example: "+628712312312"
+                  payment:
+                    type: object
+                    properties:
+                      delivery_price:
+                        type: number
+                        example: 33500
+                      discount:
+                        type: number
+                        example: 0
+                      id:
+                        type: number
+                        example: 148
+                      subtotal_price:
+                        type: number
+                        example: 3002
+                      total_price:
+                        type: number
+                        example: 144802
+                  prescription_id:
+                    type: number
+                    example: 443
+                  prescription_image:
+                    type: array
+                    items:
+                      type: string
+                      example: "https://b2b.lifepack.id/images/prescription/prescription-1591238976100085.jpg"
+                    example:
+                      - "https://b2b.lifepack.id/images/prescription/prescription-1591238976100085.jpg"
+                      - "https://b2b.lifepack.id/images/prescription/prescription-1591238976106402.jpeg"
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        currency:
+                          type: string
+                          example: IDR
+                        id:
+                          type: number
+                          example: 512
+                        name:
+                          type: string
+                          example: GLIBENCLAMID 5 MG
+                        price:
+                          type: number
+                          example: 3002
+                        qty:
+                          type: number
+                          example: 10
+                        type:
+                          type: string
+                          example: Tablet
+                    example:
+                      - currency: IDR
+                        id: 512
+                        name: GLIBENCLAMID 5 MG
+                        price: 3002
+                        qty: 10
+                        type: Tablet
+                      - currency: IDR
+                        id: 1024
+                        name: SALOFALK 500 MG
+                        price: 108300
+                        qty: 5
+                        type: Tablet
+                  reject_reason:
+                    nullable: true
+                    example: ~
+                  start_date:
+                    type: string
+                    example: "2020-06-04 07:00:00"
+                  status:
+                    type: string
+                    example: active
+                  updated_at:
+                    type: string
+                    example: "2020-06-04 11:28:46"
+              examples:
+                Success Get Subscription Detail:
+                  value:
+                    address:
+                      city: Central Jakarta City
+                      default: false
+                      district: Sawah Besar
+                      first_line: Menara Palma
+                      id: 180
+                      latitude: -6.170166
+                      longitude: 106.831375
+                      note: Graha Irama
+                      postal_code: "10710"
+                      province: Jakarta
+                      second_line: Jl. Hr. Rasuna Said Blok X2 No. 6
+                      street_name: " "
+                      sub_district: ~
+                    claim_id: "0030"
+                    currency: IDR
+                    end_date: "2020-06-08 23:59:59"
+                    estimated_delivery: "2020-06-08 08:49:18"
+                    expired_at: "2020-06-04 15:28:46"
+                    id: 411
+                    invoice_url: "https://api.lifepack.id/images/invoice/202008/20200814-invoice-770.jpg"
+                    is_notified: true
+                    next_recurring_id: 412
+                    patient:
+                      full_name: Jono Diabetes
+                      id: "183"
+                      phone_number: "+628712312312"
+                    payment:
+                      delivery_price: 33500
+                      discount: 0
+                      id: 148
+                      subtotal_price: 3002
+                      total_price: 144802
+                    prescription_id: 443
+                    prescription_image:
+                      - "https://b2b.lifepack.id/images/prescription/prescription-1591238976100085.jpg"
+                      - "https://b2b.lifepack.id/images/prescription/prescription-1591238976106402.jpeg"
+                    products:
+                      - currency: IDR
+                        id: 512
+                        name: GLIBENCLAMID 5 MG
+                        price: 3002
+                        qty: 10
+                        type: Tablet
+                      - currency: IDR
+                        id: 1024
+                        name: SALOFALK 500 MG
+                        price: 108300
+                        qty: 5
+                        type: Tablet
+                    reject_reason: ~
+                    start_date: "2020-06-04 07:00:00"
+                    status: active
+                    updated_at: "2020-06-04 11:28:46"
+        "500":
+          description: Internal server error
+    parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Example'
+          type: string
+          example: "411"
+
+tags:
+  - name: Lifepack API
+    description: "This Lifepack API contains features that can be used in your doctor consultation system.\n\n## HTTP(S) Request\n\nLifepack API can be requested through HTTP(S) Request to Lifepack Base URL endpoint. The HTTP(S) Header has to be used to allow proper authentication.\n\n### API Base URL\n\n- Sandbox Environment: `https://api-sandbox.lifepack.id/partner`\n- Production Environment: `https://api.lifepack.id/partner`\n\n## HTTP(S) Header\n\n| Header        | Value             | Definition                                                                              |\n|---------------|-------------------|-----------------------------------------------------------------------------------------|\n| Content-Type  | application/json  | The Content-Type field indicates that JSON type is acceptable to send to the recipient  |\n| Accept        | application/json  | The Accept field is used to specify that JSON type is acceptable for the response       |\n| Authorization | Basic AUTH_STRING | The Authorization field credentials can be found in Lifepack Partner Dashboard sidemenu |\n\n### Content-Type and Accept Header\n\nIn Lifepack API, the input and output parameters of the methods will be in JSON format. To accept JSON input and output parameters, you need to add the following HTTP(S) header:\n\n- Content-Type: application/json\n- Accept: application/json\n\n### Authorization Header\n\nThe authorization header utilizes API Key following HTTP(S) BASIC AUTH convention:\n\n- For Development environment, obtain `Client Key` and `Server Key` in Lifepack Partner Sandbox Dashboard in setting menu\n- For Production environment, obtain `Client Key` and `Server Key` in Lifepack Partner Dashboard in setting menu\n\nLifepack validates HTTP request by using Basic Authentication method. You must always add this header to your request headers every API call or otherwise you will get unauthorized error:\n\n```\nAUTH_STRING = Base64(CLIENT_KEY:SERVER_KEY)\n\nAuthorization: \"Basic AUTH_STRING\"\n```\n\nYou can use [Online Base64 Encode Tool](https://www.base64encode.org/) For encoding your authentication string.\n\n"
+  - name: Prescription
+    description: "In Prescription API there are two endpoints that is to upload the prescription photo and create new prescription.\n\n## Submitting Prescriptions\n\nThe detailed workflow of submitting a prescription is as follows:\n\n### Create Prescription Flow\n\n![Create Prescription Flow](https://drive.google.com/uc?export=view&id=1B9-rTzJFqvmM2UyoEKDOccZ_J_LliQhE)\n\nAfter you have submitted your prescription, you will get a subscription with `in_review` status that would be reviewed by our pharmacists. And then, there is a possibility that your prescription will be rejected and changed the status to `prescription_rejected`. There are two ways to submit prescription data to this endpoint:\n\n#### Option 1: Don't Have Prescription Photo and/or Want to Manually Input Medication Details With Existing Lifepack Product Information\n\nIf you prefer submitting prescription data with inputting the medication list, follow through this steps:\n\n1. Obtain the product IDs from product list using the endpoint `GET /partner/v1/product`\n2. Submit the prescription through using the endpoint `POST /partner/v1/prescription`. You should only pass the `products` parameter as an array. Then, the `prescription_photo_id` and `medications` parameter should be `null`.\n\n#### Option 2: Don't Have Prescription Photo and/or Want to Manually Input Medication Details (More Freely)\n\nIf you need to submit the prescription data with inputting the medication list more freely without getting list medicines from Lifepack, please follow through this steps:\n\n1. Submit the prescription through using the endpoint `POST /partner/v1/prescription`. You should only pass the `medications` parameter as an array. Then, the `prescription_photo_id` and `products` parameter should be `null`.\n\n#### Option 3: Have Prescription Photo and/or Don't Want to Manually Input Medication Details\n\nIf you prefer submitting prescription data without inputting the medication list, follow through this steps:\n\n1. Upload prescription photo through `POST /partner/v1/prescription-photo`.\n2. After you have obtained the `prescription_photo_id`, you are ready to submit the prescription. Submit the prescription through using the endpoint `POST /partner/v1/prescription`. You should only pass the `prescription_photo_id`. Then, the `products` and `medications` parameter should be `null`."
+  - name: Subscription
+    description: See information about Subscription history and Subscription Detail
+  - name: Payment
+    description: You can use Payment API to change subscription payment status.
+  - name: Patient
+    description: You can use Patient API to register new patients and retrieve their information.
+  - name: Product
+    description: You can use Product API to retrieve product lists as well as detailed product information.
+  - name: Address
+    description: Query for list of cities with supported coverage for our service.
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: basic
+  schemas:
+    Location:
+      type: object
+    Patient:
+      type: object
+    Payment:
+      type: object
+    Prescription:
+      type: object
+    Product:
+      type: object
+    Subscription:
+      type: object
+    Example:
+      type: object
+
+security:
+  - ApiKeyAuth: []
