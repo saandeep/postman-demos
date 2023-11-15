@@ -1,0 +1,66 @@
+openapi: '3.0.0'
+info:
+  description: Test
+  version: '1.0.0'
+  title: 'Customers API'
+paths:
+  /Customers/{customerId}:
+    parameters:
+      - name: customerId
+        description: The unique identifier of a customer
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/CustomerId'
+    get:
+      summary: Get Custoemrs
+      responses:
+        '200':
+          description: The customer corresponding to the provided `customerId`
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        404:
+          description: No customer found for the provided `customerId`
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    CustomerId:
+      description: The unique identifier of a customer
+      type: string
+    Customer:
+      type: object
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          $ref: '#/components/schemas/CustomerId'
+        name:
+          type: string
+        email:
+          type: string
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: A human readable error message
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
