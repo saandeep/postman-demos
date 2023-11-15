@@ -1,9 +1,13 @@
 openapi: '3.0.0'
 info:
+
+  description: Test more than 10 characters
   version: '1.0.0'
   title: 'Customers API'
+security:
+  - ApiKey : []
 paths:
-  /Customers/{customerId}:
+  /customers/{customerId}:
     parameters:
       - name: customerId
         description: The unique identifier of a customer
