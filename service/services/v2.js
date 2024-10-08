@@ -1,7 +1,7 @@
 module.exports = {
   /**
   * 
-### Get Recommendations
+### Get Recommendations demo
 
 This endpoint retrieves a list of recommendations based on the customer ID and a specified limit.
 
