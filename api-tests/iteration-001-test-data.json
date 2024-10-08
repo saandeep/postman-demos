@@ -1,0 +1,14 @@
+[
+    {
+        "customerId": "1003",
+        "aiFeatures": "generatedDescriptions,sentimentAnalysis"
+    },
+    {
+        "customerId": "1003",
+        "aiFeatures": "generatedDescriptions"
+    },
+    {
+        "customerId": "1003",
+        "aiFeatures": "sentimentAnalysis"
+    }
+]
