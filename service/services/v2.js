@@ -43,14 +43,52 @@ The response for this request follows the JSON schema below:
     //
     // throw new Error('<Error message>'); // this will result in a 500
 
-    var data = {
-        "example": "<object>",
+    var aiFeatures = options.aiFeatures;
+    var data = [
+      {
+        "id": "e8e3acf8-4d15-4c86-99fd-1231d69a37a1",
+        "name": "Ergonomic Plastic Chair",
+        "description": "tolerance France Configuration Kids parse",
+        "userRating": "320",
+        "topReviews": [
+          "Tuna Auto gold Chair",
+          "coherent protocol Engineer black Birr"
+        ]
       },
+      {
+        "id": "23d5ff6d-f356-4ced-afb4-a1abbcd26619",
+        "name": "Fantastic Soft Shoes",
+        "description": "Fantastic Soft Shoes",
+        "userRating": "230",
+        "topReviews": [
+          "TCP Montana frictionless focus",
+          "blockchains Chicken RSS withdrawal systems"
+        ]
+      }
+    ],
       status = '200';
+
+
+    console.log("AI Fetures", aiFeatures);
+      if (aiFeatures && aiFeatures!== null) {
+      for (var recommendation in data) {
+        if(aiFeatures.indexOf("generatedDescriptions") != -1){
+          console.log("adding ai description");
+          data[recommendation]["generatedDescription"] = "AI Generated Description"
+
+        };
+        if(aiFeatures.indexOf("sentimentAnalysis") != -1){
+          console.log("adding ai analysis");
+          data[recommendation]["sentimentAnalysis"] = "AI Generated Sentiment Analysis"
+
+        };
+
+      }      
+    };
 
     return {
       status: status,
       data: data
-    };  
+    };
   },
 };
