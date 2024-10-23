@@ -1,0 +1,32 @@
+[
+    {
+        "customerId": "1001",
+        "aiFeatures": "generatedDescriptions,sentimentAnalysis",
+        "expected-response": {
+        "code": 401,
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+    },
+    {
+        "customerId": "1003",
+        "aiFeatures": "generatedDescriptions",
+        "expected-response": {
+        "code": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+    },
+    {
+        "customerId": "1003",
+        "aiFeatures": "sentimentAnalysis",
+        "expected-response": {
+        "code": 200,
+        "headers": {
+            "Content-Type": "application/html"
+        }
+    }
+    }
+]
