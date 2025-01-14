@@ -25,7 +25,7 @@
         "expected-response": {
         "code": 200,
         "headers": {
-            "Content-Type": "application/html"
+            "Content-Type": "application/json"
         }
     }
     }
