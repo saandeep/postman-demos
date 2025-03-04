@@ -10,5 +10,10 @@
     {
         "customerId": "1003",
         "aiFeatures": "sentimentAnalysis"
-    }
+    },
+    
+    {
+        "customerId": "1002",
+        "aiFeatures": "generatedDescriptions,sentimentAnalysis"
+    },
 ]
