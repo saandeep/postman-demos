@@ -46,45 +46,53 @@ The response for this request follows the JSON schema below:
     var aiFeatures = options.aiFeatures;
     var data = [
       {
-        "id": "e8e3acf8-4d15-4c86-99fd-1231d69a37a1",
-        "name": "Ergonomic Plastic Chair",
-        "description": "tolerance France Configuration Kids parse",
-        "userRating": "320",
-        "topReviews": [
-          "Tuna Auto gold Chair",
-          "coherent protocol Engineer black Birr"
-        ]
+          "id": "78ca15ce-a7e0-4b8c-9237-45916c60fcb9",
+          "name": "Handcrafted Concrete Soap",
+          "description": "Unbranded",
+          "generatedDescription": "virtual SSL Rubber Accounts",
+          "userRating": "239",
+          "sentimentAnalysis": "Berkshire feed Fields Lead Dalasi",
+          "topReviews": [
+              "Mobility magnetic",
+              "Soft Assistant"
+          ]
       },
       {
-        "id": "23d5ff6d-f356-4ced-afb4-a1abbcd26619",
-        "name": "Fantastic Soft Shoes",
-        "description": "Fantastic Soft Shoes",
-        "userRating": "230",
-        "topReviews": [
-          "TCP Montana frictionless focus",
-          "blockchains Chicken RSS withdrawal systems"
-        ]
+          "id": "39336089-6829-4d50-b4b2-db2b9055a223",
+          "name": "Refined Plastic Tuna",
+          "description": "Refined",
+          "generatedDescription": "Metal Synergized",
+          "userRating": "796",
+          "sentimentAnalysis": "Quality-focused XML Sudanese vortals vertical",
+          "topReviews": [
+              "Pula Home synergistic",
+              "Djibouti Metal real-time HTTP virtual"
+          ]
       }
-    ],
+  ],
       status = '200';
 
 
-    console.log("AI Fetures", aiFeatures);
-      if (aiFeatures && aiFeatures!== null) {
-      for (var recommendation in data) {
-        if(aiFeatures.indexOf("generatedDescriptions") != -1){
-          console.log("adding ai description");
-          data[recommendation]["generatedDescription"] = "AI Generated Description"
+    // START - DEMO SCENARION
+    
+    
+    // console.log("AI Fetures", aiFeatures);
+    //   if (aiFeatures && aiFeatures!== null) {
+    //   for (var recommendation in data) {
+    //     delete data[recommendation]["generatedDescription"];
+    //     delete data[recommendation]["sentimentAnalysis"];
+    //     if(aiFeatures.indexOf("generatedDescriptions") != -1){
+    //       console.log("adding ai description");
+    //       data[recommendation]["generatedDescription"] = "AI Generated Description"
+    //     };
+    //     if(aiFeatures.indexOf("sentimentAnalysis") != -1){
+    //       console.log("adding ai analysis");
+    //       data[recommendation]["sentimentAnalysis"] = "AI Generated Sentiment Analysis"
+    //     };
+    //   }      
+    // };
 
-        };
-        if(aiFeatures.indexOf("sentimentAnalysis") != -1){
-          console.log("adding ai analysis");
-          data[recommendation]["sentimentAnalysis"] = "AI Generated Sentiment Analysis"
-
-        };
-
-      }      
-    };
+    // END - DEMO SCENARION
 
     return {
       status: status,
